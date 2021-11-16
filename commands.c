@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/16 14:29:19 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/16 14:29:49 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parseargs(char *b)
+void	execls(char *b)
 {
-	if (!ft_strncmp(b, "ls", 2))
-		execls(b);
-}
+	DIR 			*dir;
+	struct dirent	*curdir;
+	int				l;
 
-int	main()
-{
-	char	*b;
-	while (1)
+	l = ft_strlen(b);
+	if (!ft_strncmp(b, "ls", l))
 	{
-		printf("Mike's minishell%% ");
-		b = readline(NULL);
-		if (b)
+		dir = opendir(".");
+		if (!dir)
+			perror("opendir() error");
+		else
 		{
-			parseargs(b);
-			free(b);
+			while ((curdir = readdir(dir)))
+				printf("%s  ", curdir->d_name);
+			printf("\n");
+			free(curdir);
 		}
+		closedir(dir);
 	}
 }
