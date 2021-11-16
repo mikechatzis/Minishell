@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/16 14:29:49 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/16 17:02:22 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,20 @@ void	execls(char *b)
 			free(curdir);
 		}
 		closedir(dir);
+	}
+}
+
+void	execpwd(void)
+{
+	char	*dirp;
+	
+	dirp = malloc(1000);
+	dirp = getcwd(dirp, 1000);
+	if (!dirp)
+		perror("getcwd() error");
+	else
+	{
+		printf("%s\n", dirp);
+		free(dirp);
 	}
 }
