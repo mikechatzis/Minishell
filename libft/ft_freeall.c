@@ -18,7 +18,7 @@ void	ft_freeall(void	*p, ...)
 {
 	va_list	args;
 	void	*pt;
-	
+
 	va_start(args, p);
 	pt = malloc(1);
 	free(p);
