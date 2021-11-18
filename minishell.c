@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/16 17:24:50 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/18 14:27:19 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ void	parseargs(char *b)
 		execls(b);
 	else if (!ft_strncmp(b, "pwd", l))
 		execpwd();
+	else if (!ft_strncmp(b, "cd", 2))
+		execcd(b);
+	else if (!ft_strncmp(b, "./", 2))
+		execprog(b);
 	else
 	{
 		while (b[++i] != ' ' && b[i])
@@ -31,15 +35,27 @@ void	parseargs(char *b)
 	}
 }
 
+void	initialise(t_nums *nums)
+{
+	nums->hlogc = 1;
+	nums->hfd = 0;
+	g_path = getcwd(g_path, 100);
+}
+
 int	main()
 {
 	char	*b;
+	t_nums	*nums;
+
+	nums = malloc(sizeof(t_nums));
+	initialise(nums);
 	while (1)
 	{
-		printf("Mike's minishell%% ");
+		printf("Mike's minishell %% ");
 		b = readline(NULL);
 		if (b)
 		{
+			loghistory(b, nums);
 			parseargs(b);
 			free(b);
 		}

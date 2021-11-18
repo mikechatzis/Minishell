@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/16 17:02:22 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/18 14:36:31 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	execls(char *b)
 	{
 		dir = opendir(".");
 		if (!dir)
-			perror("opendir() error");
+			perror("opendir error");
 		else
 		{
 			while ((curdir = readdir(dir)))
@@ -42,10 +42,47 @@ void	execpwd(void)
 	dirp = malloc(1000);
 	dirp = getcwd(dirp, 1000);
 	if (!dirp)
-		perror("getcwd() error");
+		perror("getcwd error");
 	else
 	{
 		printf("%s\n", dirp);
 		free(dirp);
 	}
+}
+
+void	execcd(char *b)
+{
+	while (*b != ' ' && *b)
+		b++;
+	b++;
+	if (chdir(b))
+		perror(b);
+}
+
+void	execprog(char *b)
+{
+	char	**rpaths;
+	char	**argvs;
+	char	*tmp;
+	char	*fpath;
+	int		i;
+
+	rpaths = ft_split(g_path, ';');
+	argvs = ft_split(b, ' ');
+	i = 0;
+	tmp = ft_strjoin(*rpaths, "/");
+	fpath = ft_strjoin(tmp, &argvs[0][2]);
+	free(tmp);
+	if (execve(b, argvs, 0) == -1)
+	{
+		while (execve(fpath, argvs, 0) == -1 && *rpaths)
+		{
+			free(fpath);
+			rpaths++;
+			tmp = ft_strjoin(*rpaths, "/");
+			fpath = ft_strjoin(tmp, &argvs[0][2]);
+			free(tmp);
+		}
+	}
+	ft_freeall(rpaths, argvs, fpath);
 }

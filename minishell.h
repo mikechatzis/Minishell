@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/16 16:50:50 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/18 14:17:15 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,18 @@
 # include <dirent.h>
 # include "libft/libft.h"
 
+char	*g_path;
+
+typedef struct s_nums
+{
+	int	hlogc;
+	int	hfd;
+}	t_nums;
+
 void	execls(char *b);
 void	execpwd(void);
+void	execcd(char *b);
+void	loghistory(char *b, t_nums *nums);
+void	execprog(char *b);
 
 #endif
