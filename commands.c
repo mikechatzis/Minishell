@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/18 14:36:31 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:08:19 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	execls(char *b)
 {
-	DIR 			*dir;
+	DIR				*dir;
 	struct dirent	*curdir;
 	int				l;
 
@@ -26,8 +26,12 @@ void	execls(char *b)
 			perror("opendir error");
 		else
 		{
-			while ((curdir = readdir(dir)))
+			curdir = readdir(dir);
+			while ((curdir))
+			{
 				printf("%s  ", curdir->d_name);
+				curdir = readdir(dir);
+			}
 			printf("\n");
 			free(curdir);
 		}
@@ -38,7 +42,7 @@ void	execls(char *b)
 void	execpwd(void)
 {
 	char	*dirp;
-	
+
 	dirp = malloc(1000);
 	dirp = getcwd(dirp, 1000);
 	if (!dirp)

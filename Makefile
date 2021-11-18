@@ -6,7 +6,7 @@
 #    By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/18 18:00:18 by mchatzip          #+#    #+#              #
-#    Updated: 2021/11/17 13:50:27 by mchatzip         ###   ########.fr        #
+#    Updated: 2021/11/18 15:10:04 by mchatzip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ pmake:
 
 clean:
 			make -C ${LIBFT_PATH} clean  
-			${RM} ${SRCS_OBJS}
+			${RM} ${SRCS_OBJS} history
 
 fclean: 	clean
 			${RM} ${NAME}
