@@ -6,19 +6,24 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/18 15:06:40 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/22 16:00:39 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	dhandler(char *b)
+{
+	if (b)
+		free(b);
+	exit(0);
+}
+
 void	parseargs(char *b)
 {
-	int	l;
-	int	i;
+	int		l;
 
 	l = ft_strlen(b);
-	i = -1;
 	if (!ft_strncmp(b, "ls", 2))
 		execls(b);
 	else if (!ft_strncmp(b, "pwd", l))
@@ -26,13 +31,9 @@ void	parseargs(char *b)
 	else if (!ft_strncmp(b, "cd", 2))
 		execcd(b);
 	else if (!ft_strncmp(b, "./", 2))
-		execprog(b);
+		exec(b);
 	else
-	{
-		while (b[++i] != ' ' && b[i])
-			write(2, &b[i], 1);
-		write(2, ": command not found\n", 20);
-	}
+		ukncommand(b);
 }
 
 void	initialise(t_nums *nums)

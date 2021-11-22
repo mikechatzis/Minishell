@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freeall.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/18 15:11:14 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/22 14:08:34 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <stdio.h>
-#include "libft.h"
+#include "minishell.h"
 
-void	ft_freeall(void	*p, ...)
+void	exec(char *b)
 {
-	va_list	args;
-	void	*pt;
+	pid_t	pid;
 
-	va_start(args, p);
-	pt = malloc(1);
-	free(p);
-	while (pt)
-	{
-		free(pt);
-		pt = va_arg(args, void *);
-	}
+	pid = fork();
+	if (!pid)
+		execprog(b);
+	wait(&pid);
 }
 
-/*int main()
+void	ukncommand(char *b)
 {
-	char *s,*c,*k;
+	int		i;
 
-	s = malloc(1); c = malloc(1); k = malloc(1);
-	ft_freeall(s, c, k);
-	printf("%p %p %p\n", s, c, k);
-}*/
+	i = -1;
+	while (b[++i] != ' ' && b[i])
+		write(2, &b[i], 1);
+	write(2, ": command not found\n", 20);
+}
