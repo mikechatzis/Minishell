@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/23 18:05:46 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/23 19:31:10 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	dhandler(char *b)
 {
 	char	c;
 
-	c = b[0];
+	c = getchar();
 	if (c == EOF)
 	{
 		if (b)
@@ -59,10 +59,11 @@ int	main(void)
 		b = readline(NULL);
 		if (b)
 		{
-			//dhandler(b);
 			loghistory(b, nums);
 			parseargs(b);
 			free(b);
 		}
+		if (!b)
+			return(0);
 	}
 }
