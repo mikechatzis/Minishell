@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/22 14:03:43 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:42:57 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	execpwd(void)
 	dirp = malloc(1000);
 	dirp = getcwd(dirp, 1000);
 	if (!dirp)
+	{
 		perror("getcwd error");
+		free(dirp);
+	}
 	else
 	{
 		printf("%s\n", dirp);
