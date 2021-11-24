@@ -6,24 +6,11 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/24 10:08:03 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/24 14:47:29 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	dhandler(char *b)
-{
-	char	c;
-
-	c = getchar();
-	if (c == EOF)
-	{
-		if (b)
-			free(b);
-		exit(0);
-	}
-}
 
 void	parseargs(char *b)
 {
@@ -68,5 +55,6 @@ int	main(void)
 			free(nums);
 			return(0);
 		}
+		bslashhandler();
 	}
 }

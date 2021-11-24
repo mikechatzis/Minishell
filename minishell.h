@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/22 15:38:38 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/24 14:33:13 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	loghistory(char *b, t_nums *nums);
 void	execprog(char *b);
 void	exec(char *b);
 void	ukncommand(char *b);
+void	bslashhandler(void);
 
 #endif

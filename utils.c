@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/23 15:41:24 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/24 14:56:35 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,18 @@ void	ukncommand(char *b)
 	while (b[++i] != ' ' && b[i])
 		write(2, &b[i], 1);
 	write(2, ": command not found\n", 20);
+}
+
+void	dhandler(int signum)
+{
+	if (signum == SIGQUIT)
+		exit(0);
+}
+
+void	bslashhandler(void)
+{
+	struct sigaction	s;
+
+	s.sa_handler = dhandler;
+	sigaction(SIGQUIT, &s, NULL);
 }
