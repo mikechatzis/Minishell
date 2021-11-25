@@ -1,63 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/25 19:10:07 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/25 19:55:14 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec(char *b)
+char	*prints(char *s)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (!pid)
-		execprog(b);
-	wait(&pid);
-}
-
-void	ukncommand(char *b)
-{
-	int		i;
-
-	i = -1;
-	if (!*b)
-		return ;
-	while (b[++i] != ' ' && b[i])
-		write(2, &b[i], 1);
-	write(2, ": command not found\n", 20);
-}
-
-void	dhandler(int signum)
-{
-	if (signum == SIGQUIT)
-		exit(0);
-}
-
-void	bslashhandler(void)
-{
-	struct sigaction	s;
-
-	s.sa_handler = dhandler;
-	sigaction(SIGQUIT, &s, NULL);
-}
-
-int	countchar(char *s, char c)
-{
-	int	i;
-
-	i = 0;
+	if (s[0] == '\'' && !ft_strchr(&s[1], '\''))
+	{
+		write(2, "quote>", 6);
+		return (0);
+	}
+	if (s[0] == '"' && !ft_strchr(&s[1], '"'))
+	{
+		write(2, "dquote>", 7);
+		return (0);
+	}
+	s++;
 	while (*s)
 	{
-		if (*s == c)
-			i++;
+		if (s[0] == '\'')
+			while (*s != '\'')
+			{
+				write(1, &*s, 1);
+				s++;
+			}
 		s++;
 	}
-	return (i);
+	return (s);
+}
+
+char	*prints2(char *s)
+{
+	if (!ft_strchr(&s[1], '\''))
+	{
+		write(2, "quote>", 6);
+		return (0);
+	}
+	s++;
+	while (*s != '\'')
+	{
+		write(1, &*s, 1);
+		s++;
+	}
+	return (s + 1);
 }

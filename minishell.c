@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/24 14:47:29 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:33:20 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	parseargs(char *b)
 		execcd(b);
 	else if (!ft_strncmp(b, "./", 2))
 		exec(b);
+	else if (!ft_strncmp(b, "echo", 4))
+		exececho(b);
 	else
 		ukncommand(b);
 }

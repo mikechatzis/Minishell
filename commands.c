@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/24 09:34:01 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/25 19:59:19 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,31 @@ void	execprog(char *b)
 		}
 	}
 	ft_freeall(rpaths, argvs, fpath);
+}
+
+void	exececho(char *b)
+{
+	char	*prs;
+	char	**sp;
+
+	if (ft_strnstr(b, "-n", 7))
+		prs = ft_strdup(&b[8]);
+	else
+		prs = ft_strdup(&b[5]);
+	sp = ft_split(prs, ' ');
+	free(prs);
+	while (*sp)
+	{
+		if (ft_strchr(*sp, '\'') || ft_strchr(*sp, '"'))
+			prints(*sp);
+		else
+			printf("%s", *sp);
+		sp++;
+		if (*sp)
+			printf(" ");
+	}
+	if (ft_strnstr(b, "-n", 7))
+		printf("%%\n");
+	else
+		printf("\n");
 }
