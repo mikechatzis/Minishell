@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/25 19:14:44 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/30 13:50:21 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ukncommand(char *b);
 void	bslashhandler(void);
 void	exececho(char *b);
 int		countchar(char *s, char c);
-char	*prints (char *s);
+int		prints (char *s);
 char	*prints2(char *s);
 
 #endif

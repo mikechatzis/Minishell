@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/25 19:59:19 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:03:46 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	exececho(char *b)
 	else
 		prs = ft_strdup(&b[5]);
 	sp = ft_split(prs, ' ');
+	//printf("//%s %s //\n", sp[0], sp[1]);
 	free(prs);
 	while (*sp)
 	{
