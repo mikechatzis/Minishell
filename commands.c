@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/30 16:03:46 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:35:38 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	exececho(char *b)
 	char	*prs;
 	char	**sp;
 
+	if (echoerrcheck(b))
+		return ;
 	if (ft_strnstr(b, "-n", 7))
 		prs = ft_strdup(&b[8]);
 	else

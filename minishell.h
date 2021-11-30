@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/30 13:50:21 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/11/30 16:36:34 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	exececho(char *b);
 int		countchar(char *s, char c);
 int		prints (char *s);
 char	*prints2(char *s);
-
+int		echoerrcheck(char *b);
 #endif
