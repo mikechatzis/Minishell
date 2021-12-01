@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/30 17:13:11 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:40:23 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,25 @@ int	echoerrcheck(char *b)
 	{
 		if (b[i] == '\'')
 		{
-			while(b[++i] != '\'')
+			while (b[++i] != '\'')
+			{
 				if (!b[i])
 				{
-					write(2, "<quote\n", 7);
+					write(2, "quote>\n", 7);
 					return (-1);
 				}
+			}
 		}
 		if (b[i] == '"')
 		{
-			while(b[++i] != '"')
+			while (b[++i] != '"')
+			{
 				if (!b[i])
 				{
-					write(2, "<dquote\n", 8);
+					write(2, "dquote>\n", 8);
 					return (-1);
 				}
+			}
 		}
 	}
 	return (0);
@@ -81,22 +85,50 @@ int	prints(char *s)
 			printf("%s", b[j++]);
 		}
 	}
-	free(b);
 	return (0);
 }
 
-char	*prints2(char *s)
+int	namecmp(char *s, char *b)
 {
-	if (!ft_strchr(&s[1], '\''))
+	while(*s && *b)
 	{
-		write(2, "quote>", 6);
-		return (0);
-	}
-	s++;
-	while (*s != '\'')
-	{
-		write(1, &*s, 1);
+		if (*s != *b)
+			break ;
+		if (*s == '=' && *b == '=')
+			return (1);
 		s++;
+		b++;
 	}
-	return (s + 1);
+	return (0);
+}
+
+char	*parseenv(char **b, char *name)
+{
+	char	*s;
+	int		len;
+	int		i;
+
+	i = -1;
+	s = ft_strdup("");
+	len = ft_strlen(name);
+	while (b[++i])
+	{
+		if (!ft_strncmp(b[i], name, len))
+		{
+			free(s);
+			s = ft_substr(b[i], len + 1, ft_strlen(b[i]));
+			return (s);
+		}
+	}
+	return (s);
+}
+
+int	printvar(char *s)
+{
+	char	*b;
+	
+	b = parseenv(ENV, &s[1]);
+	printf("%s", b);
+	free(b);
+	return 0;
 }

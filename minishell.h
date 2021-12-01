@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/11/30 16:36:34 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:23:19 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@
 # include "libft/libft.h"
 
 char	*g_path;
+char	**ENV;
 
 typedef struct s_nums
 {
 	int	hlogc;
 	int	hfd;
+	int	envi;
 }	t_nums;
 
 void	execls(char *b);
@@ -46,4 +48,9 @@ int		countchar(char *s, char c);
 int		prints (char *s);
 char	*prints2(char *s);
 int		echoerrcheck(char *b);
+void	execexport(char *b);
+char	*parseenv(char **ENV, char *name);
+int		printvar(char *s);
+int		namecmp(char *s, char *b);
+
 #endif
