@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/01 18:40:23 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:03:40 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,11 @@ int	printvar(char *s)
 {
 	char	*b;
 	
+	while (*s && *s != '$')
+	{
+		write(1, &*s, 1);
+		s++;	
+	}
 	b = parseenv(ENV, &s[1]);
 	printf("%s", b);
 	free(b);
