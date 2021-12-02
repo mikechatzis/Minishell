@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/02 16:23:02 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/02 17:07:09 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	prints(char *s)
 {
 	int		i;
 	int		j;
-	char	*b[100];
+	char	*b;
 
 	i = 0;
 	j = 0;
@@ -60,37 +60,34 @@ int	prints(char *s)
 			i++;
 			while (s[i] != '\'' && s[i])
 				i++;
-			b[j] = ft_substr(s, 1, i - 1);
+			b = ft_substr(s, 1, i - 1);
 			s += i + 1;
 			i = 0;
-			printf("%s", b[j]);
-			free(b[j++]);
+			printf("%s", b);
+			free(b);
 		}
 		else if (s[i] == '"')
 		{
 			i++;
 			while (s[i] != '"' && s[i])
 				i++;
-			b[j] = ft_substr(s, 1, i - 1);
+			b = ft_substr(s, 1, i - 1);
 			s += i + 1;
 			i = 0;
-			printf("%s", b[j]);
-			free(b[j++]);
+			printf("%s", b);
+			free(b);
 		}
 		else
 		{
 			while (s[i] != '"' && s[i] != '\'' && s[i] && s[i] != '$')
 				i++;
-			b[j] = ft_substr(s, 0, i);
+			b = ft_substr(s, 0, i);
 			s += i;
 			i = 0;
-			printf("%s", b[j]);
-			free(b[j++]);
+			printf("%s", b);
+			free(b);
 			if (s[i] == '$')
-			{
 				s += printvar(s);
-				i = 0;
-			}
 		}
 	}
 	return (0);
@@ -121,7 +118,7 @@ char	*parseenv(char **b, char *name)
 	len = ft_strlen(name);
 	while (b[++i])
 	{
-		if (!ft_strncmp(b[i], name, len))
+		if (!ft_strncmp(b[i], name, len) && *name)
 		{
 			free(s);
 			s = ft_substr(b[i], len + 1, ft_strlen(b[i]));
@@ -141,6 +138,8 @@ int	printvar(char *s)
 	i = 0;
 	ret = 0;
 	while (s[i] && s[i] != '$')
+		i++;
+	if (!s[i + 1])
 		i++;
 	b = ft_substr(s, 0, i);
 	printf("%s", b);

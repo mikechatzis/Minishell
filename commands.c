@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/02 16:00:25 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/02 16:56:50 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void	exececho(char *b)
 	free(prs);
 	while (*sp)
 	{
-		//printf("//%s//\n", *sp);
 		if (ft_strchr(*sp, '\'') || ft_strchr(*sp, '"'))
 			prints(*sp);
 		else if (ft_strchr(*sp, '$') && !ft_strchr(*sp, '\'') && !ft_strchr(*sp, '"'))
