@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/01 18:56:06 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/02 13:43:41 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	parseargs(char *b)
 		execls(b);
 	else if (!ft_strncmp(b, "pwd", 3))
 		execpwd();
-	else if (!ft_strncmp(b, "cd", 2))
+	else if (!ft_strncmp(b, "cd ", 3))
 		execcd(b);
 	else if (!ft_strncmp(b, "./", 2))
 		exec(b);
-	else if (!ft_strncmp(b, "echo", 4))
+	else if (!ft_strncmp(b, "echo ", 5))
 		exececho(b);
-	else if (!ft_strncmp(b, "export", 6))
+	else if (!ft_strncmp(b, "export ", 7))
 		execexport(b);
 	else
 		ukncommand(b);

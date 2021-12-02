@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/01 19:03:40 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/02 16:23:02 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	echoerrcheck(char *b)
 			{
 				if (!b[i])
 				{
-					write(2, "quote>\n", 7);
+					write(2, "missing quote>\n", 15);
 					return (-1);
 				}
 			}
@@ -36,7 +36,7 @@ int	echoerrcheck(char *b)
 			{
 				if (!b[i])
 				{
-					write(2, "dquote>\n", 8);
+					write(2, "missing dquote>\n", 16);
 					return (-1);
 				}
 			}
@@ -63,7 +63,8 @@ int	prints(char *s)
 			b[j] = ft_substr(s, 1, i - 1);
 			s += i + 1;
 			i = 0;
-			printf("%s", b[j++]);
+			printf("%s", b[j]);
+			free(b[j++]);
 		}
 		else if (s[i] == '"')
 		{
@@ -73,16 +74,23 @@ int	prints(char *s)
 			b[j] = ft_substr(s, 1, i - 1);
 			s += i + 1;
 			i = 0;
-			printf("%s", b[j++]);
+			printf("%s", b[j]);
+			free(b[j++]);
 		}
 		else
 		{
-			while (s[i] != '"' && s[i] != '\'' && s[i])
+			while (s[i] != '"' && s[i] != '\'' && s[i] && s[i] != '$')
 				i++;
 			b[j] = ft_substr(s, 0, i);
 			s += i;
 			i = 0;
-			printf("%s", b[j++]);
+			printf("%s", b[j]);
+			free(b[j++]);
+			if (s[i] == '$')
+			{
+				s += printvar(s);
+				i = 0;
+			}
 		}
 	}
 	return (0);
@@ -126,14 +134,32 @@ char	*parseenv(char **b, char *name)
 int	printvar(char *s)
 {
 	char	*b;
-	
-	while (*s && *s != '$')
-	{
-		write(1, &*s, 1);
-		s++;	
-	}
-	b = parseenv(ENV, &s[1]);
+	char	*name;
+	int		i;
+	int		ret;
+
+	i = 0;
+	ret = 0;
+	while (s[i] && s[i] != '$')
+		i++;
+	b = ft_substr(s, 0, i);
 	printf("%s", b);
+	s += i;
 	free(b);
-	return 0;
+	i = 1;
+	while (*s)
+	{
+		while (s[i] && s[i] != '\'' && s[i] != '"' && s[i] != '$')
+			i++;
+		name = ft_substr(&s[1], 0, i - 1);
+		b = parseenv(ENV, name);
+		printf("%s", b);
+		ret += ft_strlen(name) + 1;
+		free(b);
+		free(name);
+		s += i;
+		if (*s != '$')
+			break ;
+	}
+	return (ret);
 }
