@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/02 17:07:09 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/03 16:48:01 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	echoerrcheck(char *b)
 	return (0);
 }
 
-int	prints(char *s)
+int	prints(char *s, t_nums *n)
 {
 	int		i;
 	int		j;
@@ -63,7 +63,7 @@ int	prints(char *s)
 			b = ft_substr(s, 1, i - 1);
 			s += i + 1;
 			i = 0;
-			printf("%s", b);
+			n->print = printf("%s", b);
 			free(b);
 		}
 		else if (s[i] == '"')
@@ -74,7 +74,7 @@ int	prints(char *s)
 			b = ft_substr(s, 1, i - 1);
 			s += i + 1;
 			i = 0;
-			printf("%s", b);
+			n->print = printf("%s", b);
 			free(b);
 		}
 		else
@@ -84,10 +84,10 @@ int	prints(char *s)
 			b = ft_substr(s, 0, i);
 			s += i;
 			i = 0;
-			printf("%s", b);
+			n->print = printf("%s", b);
 			free(b);
 			if (s[i] == '$')
-				s += printvar(s);
+				s += printvar(s, n);
 		}
 	}
 	return (0);
@@ -128,7 +128,7 @@ char	*parseenv(char **b, char *name)
 	return (s);
 }
 
-int	printvar(char *s)
+int	printvar(char *s, t_nums *n)
 {
 	char	*b;
 	char	*name;
@@ -142,7 +142,7 @@ int	printvar(char *s)
 	if (!s[i + 1])
 		i++;
 	b = ft_substr(s, 0, i);
-	printf("%s", b);
+	n->print = printf("%s", b);
 	s += i;
 	free(b);
 	i = 1;
@@ -152,7 +152,7 @@ int	printvar(char *s)
 			i++;
 		name = ft_substr(&s[1], 0, i - 1);
 		b = parseenv(ENV, name);
-		printf("%s", b);
+		n->print = printf("%s", b);
 		ret += ft_strlen(name) + 1;
 		free(b);
 		free(name);

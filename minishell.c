@@ -6,13 +6,13 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/02 13:43:41 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/03 16:45:17 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parseargs(char *b)
+void	parseargs(char *b, t_nums *n)
 {
 	if (!ft_strncmp(b, "ls", 2))
 		execls(b);
@@ -23,9 +23,11 @@ void	parseargs(char *b)
 	else if (!ft_strncmp(b, "./", 2))
 		exec(b);
 	else if (!ft_strncmp(b, "echo ", 5))
-		exececho(b);
+		exececho(b, n);
 	else if (!ft_strncmp(b, "export ", 7))
 		execexport(b);
+	else if (!ft_strncmp(b, "unset ", 6))
+		execunset(b);
 	else
 		ukncommand(b);
 }
@@ -52,7 +54,7 @@ int	main(void)
 		if (b)
 		{
 			loghistory(b, nums);
-			parseargs(b);
+			parseargs(b, nums);
 			free(b);
 		}
 		if (!b)

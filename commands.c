@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/02 16:56:50 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/03 16:48:30 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	execprog(char *b)
 	ft_freeall(rpaths, argvs, fpath);
 }
 
-void	exececho(char *b)
+void	exececho(char *b, t_nums *n)
 {
 	char	*prs;
 	char	**sp;
@@ -108,13 +108,13 @@ void	exececho(char *b)
 	while (*sp)
 	{
 		if (ft_strchr(*sp, '\'') || ft_strchr(*sp, '"'))
-			prints(*sp);
+			prints(*sp, n);
 		else if (ft_strchr(*sp, '$') && !ft_strchr(*sp, '\'') && !ft_strchr(*sp, '"'))
-			printvar(*sp);
+			printvar(*sp, n);
 		else
-			printf("%s", *sp);
+			n->print = printf("%s", *sp);
 		sp++;
-		if (*sp)
+		if (*sp && n->print)
 			printf(" ");
 	}
 	if (ft_strnstr(b, "-n", 7))

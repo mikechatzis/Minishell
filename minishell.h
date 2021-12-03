@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/01 18:23:19 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/03 16:44:27 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_nums
 	int	hlogc;
 	int	hfd;
 	int	envi;
+	int	print;
 }	t_nums;
 
 void	execls(char *b);
@@ -43,14 +44,15 @@ void	execprog(char *b);
 void	exec(char *b);
 void	ukncommand(char *b);
 void	bslashhandler(void);
-void	exececho(char *b);
+void	exececho(char *b, t_nums *n);
 int		countchar(char *s, char c);
-int		prints (char *s);
-char	*prints2(char *s);
+int		prints (char *s, t_nums *n);
 int		echoerrcheck(char *b);
 void	execexport(char *b);
+void	execunset(char *b);
 char	*parseenv(char **ENV, char *name);
-int		printvar(char *s);
+int		printvar(char *s, t_nums *n);
 int		namecmp(char *s, char *b);
+int		namecmpu(char *s, char *b);
 
 #endif
