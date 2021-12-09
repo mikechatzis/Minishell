@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/03 16:48:30 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/09 13:04:51 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,21 @@ void	execprog(char *b)
 	char	**argvs;
 	char	*tmp;
 	char	*fpath;
+	int		i;
 
 	rpaths = ft_split(g_path, ' ');
 	argvs = ft_split(b, ' ');
 	tmp = ft_strjoin(*rpaths, "/");
 	fpath = ft_strjoin(tmp, &argvs[0][2]);
 	free(tmp);
-	if (execve(&b[2], argvs, 0) == -1)
+	if ((i = execve(&b[2], argvs, 0)) == -1)
 	{
-		while (execve(fpath, argvs, 0) == -1 && *rpaths)
+		while ((i = (execve(fpath, argvs, 0))) == -1 && *rpaths)
 		{
 			free(fpath);
 			rpaths++;
+			if (i == -1)
+				perror(&b[2]);
 			tmp = ft_strjoin(*rpaths, "/");
 			fpath = ft_strjoin(tmp, &argvs[0][2]);
 			free(tmp);
