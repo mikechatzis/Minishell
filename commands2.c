@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/09 12:28:24 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/09 14:47:35 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,36 @@ void	execenv(char *b)
 {
 	int		i;
 	char	*s;
-	char	*ex;
+	char	*sub;
+	char	**sp;
 
-	i = -1;
-	ex = ft_strnstr(b, "./", ft_strlen(b));
+	i = 0;
+	sp = ft_split(b, ' ');
 	s = ft_strjoin("export ", &b[3]);
-	if (ft_strchr(b, '='))
-		execexport(s);
-	if (ex)
-		exec(ex);
-	if (!ex)
+	sub = ft_strnstr(b, "./", ft_strlen(b));
+	while (sp[i] && (ft_strchr(sp[i], '=') || (!ft_strncmp(sp[i], "env", 3) && i == 0)))
+		i++;
+	execexport(s);
+	if (sp[i] && !ft_strchr(sp[i], '='))
 	{
+		if (!ft_strnstr(sp[i], "./", ft_strlen(sp[i])))
+			printf("./%s: no such file or directory\n", sp[i]);
+		else if (sub)
+			exec(sub);
+		else
+		{
+			free(s);
+			s = ft_strjoin("./", sp[i]);
+			exec(s);
+		}
+	}
+	else
+	{
+		i = -1;
 		while (ENV[++i] && *ENV[i])
 			printf("%s\n", ENV[i]);
 	}
-	if (ft_strchr(b, '='))
-		execunset(s);
+	execunset(s);
 	free(s);
+	free(sp);
 }
