@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/09 14:47:35 by mchatzip         ###   ########.fr       */
+/*   Updated: 2021/12/13 14:50:34 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	execenv(char *b)
 {
 	int		i;
 	char	*s;
+	char	*sav;
 	char	*sub;
 	char	**sp;
 
@@ -71,6 +72,7 @@ void	execenv(char *b)
 	sp = ft_split(b, ' ');
 	s = ft_strjoin("export ", &b[3]);
 	sub = ft_strnstr(b, "./", ft_strlen(b));
+	sav = saveenv();
 	while (sp[i] && (ft_strchr(sp[i], '=') || (!ft_strncmp(sp[i], "env", 3) && i == 0)))
 		i++;
 	execexport(s);
@@ -93,7 +95,6 @@ void	execenv(char *b)
 		while (ENV[++i] && *ENV[i])
 			printf("%s\n", ENV[i]);
 	}
-	execunset(s);
-	free(s);
-	free(sp);
+	restoreenv(sav);
+	free3(s, sp, sav);
 }
