@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/09 13:39:57 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/10 12:30:38 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	execprog(char *b)
 			free(tmp);
 		}
 	}
-	ft_freeall(rpaths, argvs, fpath);
+	free3(rpaths, argvs, fpath);
 }
 
 void	exececho(char *b, t_nums *n)

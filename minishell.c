@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/13 13:34:07 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/10 14:08:14 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	initialise(t_nums *nums)
 	nums->hfd = 0;
 	g_path = getcwd(g_path, 100);
 	ENV = malloc(1000 * sizeof(char *));
+	ENV[999] = 0;
 }
 
 int	main(void)

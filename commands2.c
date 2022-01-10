@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/13 14:50:34 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/10 18:04:26 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,20 @@ void	execexport(char *b)
 	c = -1;
 	while (s[++c])
 	{
-		while (ENV[i] && *ENV[i] && !namecmp(ENV[i], s[c]))
+		while (ENV[i] && (!namecmp(ENV[i], s[c]) || !ENV[i][0]))
 			i++;
 		if (ft_strchr(s[c], '='))
 		{
 			if (ENV[i])
 				free(ENV[i]);
-			if (*s[c] != '=')
-				ENV[i] = ft_strdup(s[c]);
-			i = 0;	
+			//if (*s[c] != '=')
+				ENV[i] = ft_strdup(s[c]);	
 		}
+		i = 0;
 	}
-	i = 0;
+	//while (ENV[i])
+		//printf("%s\n", ENV[i++]);
+	//saveenv();
 	free(s);
 }
 
@@ -47,15 +49,14 @@ void	execunset(char *b)
 
 	b += 5;
 	c = -1;
-	i = 0;
+	i = -1;
 	s = ft_split(b, ' ');
 	while (s[++c])
 	{
-		while (ENV[i] && namecmpu(ENV[i], s[c]))
-			i++;
-		if (ENV[i])
-			ft_bzero(ENV[i], ft_strlen(ENV[i]));
-		i = 0;
+		while (ENV[++i])
+			if (!namecmpu(ENV[i], s[c]))
+				ft_bzero(ENV[i], ft_strlen(ENV[i]));
+		i = -1;
 	}
 	free(s);
 }
@@ -92,8 +93,9 @@ void	execenv(char *b)
 	else
 	{
 		i = -1;
-		while (ENV[++i] && *ENV[i])
-			printf("%s\n", ENV[i]);
+		while (ENV[++i])
+			if (ENV[i][0])
+				printf("%s\n", ENV[i]);
 	}
 	restoreenv(sav);
 	free3(s, sp, sav);

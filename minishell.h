@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/13 14:50:21 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:28:04 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char	*parseenv(char **ENV, char *name);
 int		printvar(char *s, t_nums *n);
 int		namecmp(char *s, char *b);
 int		namecmpu(char *s, char *b);
+int		namecmpx(char **s, char *b);
 void	execenv(char *b);
 char	*saveenv(void);
 void	restoreenv(char *s);
