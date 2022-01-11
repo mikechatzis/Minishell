@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/10 15:28:04 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/11 13:39:38 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <signal.h>
 # include "libft/libft.h"
 
-char	*g_path;
 char	**ENV;
 
 typedef struct s_nums
@@ -59,5 +58,6 @@ void	execenv(char *b);
 char	*saveenv(void);
 void	restoreenv(char *s);
 void	free3(void *s, void *sp, void *sav);
+void	setenviron(void);
 
 #endif

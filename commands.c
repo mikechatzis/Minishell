@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/10 12:30:38 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/11 13:57:09 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,18 @@ void	execpwd(void)
 
 void	execcd(char *b)
 {
+	char	*tmp;
+	
+	tmp = malloc(100);
 	while (*b != ' ' && *b)
 		b++;
 	b++;
 	if (chdir(b))
 		perror(b);
+	tmp = getcwd(tmp, 100);
+	free(ENV[1]);
+	ENV[1] = ft_strjoin("PWD=", tmp);
+	free(tmp);
 }
 
 void	execprog(char *b)
@@ -74,14 +81,15 @@ void	execprog(char *b)
 	char	*fpath;
 	int		i;
 
-	rpaths = ft_split(g_path, ' ');
+	ENV[0] += 5;
+	rpaths = ft_split(ENV[0], ' ');
 	argvs = ft_split(b, ' ');
 	tmp = ft_strjoin(*rpaths, "/");
 	fpath = ft_strjoin(tmp, &argvs[0][2]);
 	free(tmp);
-	if ((i = execve(&b[2], argvs, 0)) == -1)
+	if ((i = execve(&b[2], argvs, ENV)) == -1)
 	{
-		while ((i = (execve(fpath, argvs, 0))) == -1 && *rpaths)
+		while ((i = (execve(fpath, argvs, ENV))) == -1 && *rpaths)
 		{
 			free(fpath);
 			rpaths++;
