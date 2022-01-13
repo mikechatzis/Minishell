@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/11 17:12:21 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:17:16 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,21 @@ void	setenviron(void)
 	ENV[20] = ft_strjoin("GIT_ASKPASS=", getenv("GIT_ASKPASS"));
 	setenviron2();
 	ENV[999] = 0;
+}
+
+char	**processinput(char	*b)
+{
+	char	**s;
+	char	**ret;
+	int		i;
+	
+	i = -1;
+	s = ft_split(b, ' ');
+	ret = malloc(1000);
+	while (s[++i])
+		ret[i] = ft_strtrim(s[i], "'\"");
+	ret[i] = 0;
+	i = 0;
+	free(s);
+	return(ret);
 }

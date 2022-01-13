@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/10 18:04:26 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:19:50 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void	execexport(char *b)
 	char	**s;
 	
 	b += 6;
-	s = ft_split(b, ' ');
 	i = 0;
 	c = -1;
+	if (echoerrcheck(b))
+		return ;
+	s = processinput(b);
 	while (s[++c])
 	{
 		while (ENV[i] && (!namecmp(ENV[i], s[c]) || !ENV[i][0]))
@@ -30,14 +32,10 @@ void	execexport(char *b)
 		{
 			if (ENV[i])
 				free(ENV[i]);
-			//if (*s[c] != '=')
-				ENV[i] = ft_strdup(s[c]);	
+				ENV[i] = ft_strdup(s[c]);
 		}
 		i = 0;
 	}
-	//while (ENV[i])
-		//printf("%s\n", ENV[i++]);
-	//saveenv();
 	free(s);
 }
 
@@ -50,7 +48,9 @@ void	execunset(char *b)
 	b += 5;
 	c = -1;
 	i = -1;
-	s = ft_split(b, ' ');
+	if (echoerrcheck(b))
+		return ;
+	s = processinput(b);
 	while (s[++c])
 	{
 		while (ENV[++i])

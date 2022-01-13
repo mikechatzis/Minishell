@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/11 13:39:38 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/13 16:09:59 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ char	*saveenv(void);
 void	restoreenv(char *s);
 void	free3(void *s, void *sp, void *sav);
 void	setenviron(void);
+char	**processinput(char	*b);
 
 #endif
