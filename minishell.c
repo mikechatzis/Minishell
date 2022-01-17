@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/11 13:39:25 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:32:21 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	parseargs(char *b, t_nums *n)
 {
-	//printf("chkpt reached");
 	if (!ft_strncmp(b, "ls", 2))
 		execls(b);
 	else if (!ft_strncmp(b, "pwd", 3))
@@ -46,11 +45,13 @@ int	main(void)
 {
 	char	*b;
 	t_nums	*nums;
+	int		sigx;
 
 	nums = malloc(sizeof(t_nums));
 	initialise(nums);
 	while (1)
 	{
+		sigx = sighandler();
 		printf("Mike's minishell %% ");
 		b = readline(NULL);
 		if (b)
@@ -64,6 +65,5 @@ int	main(void)
 			free(nums);
 			return(0);
 		}
-		bslashhandler();
 	}
 }

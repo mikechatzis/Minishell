@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/13 16:09:59 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/14 18:02:11 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,30 @@
 # include <sys/wait.h>
 # include <dirent.h>
 # include <signal.h>
+# include <stdbool.h>
 # include "libft/libft.h"
 
 char	**ENV;
+bool	g_sigsent;
 
 typedef struct s_nums
 {
-	int	hlogc;
-	int	hfd;
-	int	envi;
-	int	print;
+	int		hlogc;
+	int		hfd;
+	int		envi;
+	int		print;
+	bool	sig;
 }	t_nums;
 
 void	execls(char *b);
 void	execpwd(void);
+void	dhandler(int signum);
 void	execcd(char *b);
 void	loghistory(char *b, t_nums *nums);
 void	execprog(char *b);
 void	exec(char *b);
 void	ukncommand(char *b);
-void	bslashhandler(void);
+int		sighandler(void);
 void	exececho(char *b, t_nums *n);
 int		countchar(char *s, char c);
 int		prints (char *s, t_nums *n);

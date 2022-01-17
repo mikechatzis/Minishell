@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2021/12/09 13:04:33 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:39:23 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,30 @@ void	ukncommand(char *b)
 
 void	dhandler(int signum)
 {
-	if (signum == SIGQUIT)
-		exit(0);
+	if (signum == SIGINT)
+	{
+		if (signum == SIGINT)
+		{
+			printf("\n");
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
+	}
 }
 
-void	bslashhandler(void)
+int	sighandler(void)
 {
 	struct sigaction	s;
+	int					i;
 
+	i = 1;
 	s.sa_handler = dhandler;
-	sigaction(SIGQUIT, &s, NULL);
+	s.sa_flags = SA_RESTART;
+	i = sigaction(SIGINT, &s, NULL);
+	s.sa_handler = SIG_IGN;
+	i = sigaction(SIGQUIT, &s, NULL);
+	return (i);
 }
 
 int	countchar(char *s, char c)
