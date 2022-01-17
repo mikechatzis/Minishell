@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/17 13:39:23 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:47:39 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ void	dhandler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		if (signum == SIGINT)
-		{
-			printf("\n");
+			write(2, "\n", 1);
 			rl_on_new_line();
-			rl_replace_line("", 0);
+			//rl_replace_line("", 0);
 			rl_redisplay();
-		}
 	}
+	else if (signum == SIGQUIT)
+		write(2, "\b  \b", 5);
 }
 
 int	sighandler(void)
@@ -57,7 +56,6 @@ int	sighandler(void)
 	s.sa_handler = dhandler;
 	s.sa_flags = SA_RESTART;
 	i = sigaction(SIGINT, &s, NULL);
-	s.sa_handler = SIG_IGN;
 	i = sigaction(SIGQUIT, &s, NULL);
 	return (i);
 }
