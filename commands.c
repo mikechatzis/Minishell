@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/11 13:57:09 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:30:42 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	execprog(char *b)
 	int		i;
 
 	ENV[0] += 5;
-	rpaths = ft_split(ENV[0], ' ');
+	rpaths = ft_split(ENV[0], ':');
 	argvs = ft_split(b, ' ');
 	tmp = ft_strjoin(*rpaths, "/");
 	fpath = ft_strjoin(tmp, &argvs[0][2]);
@@ -103,30 +103,33 @@ void	execprog(char *b)
 	free3(rpaths, argvs, fpath);
 }
 
-void	exececho(char *b, t_nums *n)
+void	exececho(char *b)
 {
-	char	*prs;
-	char	**sp;
-
 	if (echoerrcheck(b))
 		return ;
 	if (ft_strnstr(b, "-n", 7))
-		prs = ft_strdup(&b[8]);
+		b += 7;
 	else
-		prs = ft_strdup(&b[5]);
-	sp = ft_split(prs, ' ');
-	free(prs);
-	while (*sp)
+		b += 5;
+	while (*b == ' ' && *b)
+		b++;
+	while (*b)
 	{
-		if (ft_strchr(*sp, '\'') || ft_strchr(*sp, '"'))
-			prints(*sp, n);
-		else if (ft_strchr(*sp, '$') && !ft_strchr(*sp, '\'') && !ft_strchr(*sp, '"'))
-			printvar(*sp, n);
-		else
-			n->print = printf("%s", *sp);
-		sp++;
-		if (*sp && n->print)
-			printf(" ");
+		if (*b == ' ')
+			b = handlespace(b);
+		if (*b == '\'')
+			b = handlesquotes(b);
+		if (*b == '"')
+			b = handledquotes(b);
+		if (*b == '$')
+			b = printvar(b);
+		// if (!strncmp(b, "$$", 2))
+		// 	b = handlepiddis(b);
+		if (*b != ' ' && *b != '$' && *b != '\'' && *b != '"')
+		{
+			printf("%c", *b);	
+			b++;
+		}
 	}
 	if (ft_strnstr(b, "-n", 7))
 		printf("%%\n");

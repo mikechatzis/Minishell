@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/14 18:02:11 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:24:59 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	execprog(char *b);
 void	exec(char *b);
 void	ukncommand(char *b);
 int		sighandler(void);
-void	exececho(char *b, t_nums *n);
+void	exececho(char *b);
 int		countchar(char *s, char c);
 int		prints (char *s, t_nums *n);
 int		echoerrcheck(char *b);
 void	execexport(char *b);
 void	execunset(char *b);
 char	*parseenv(char **ENV, char *name);
-int		printvar(char *s, t_nums *n);
+char	*printvar(char *s);
 int		namecmp(char *s, char *b);
 int		namecmpu(char *s, char *b);
 int		namecmpx(char **s, char *b);
@@ -64,5 +64,10 @@ void	restoreenv(char *s);
 void	free3(void *s, void *sp, void *sav);
 void	setenviron(void);
 char	**processinput(char	*b);
+char	*handlespace(char *b);
+char	*handlesquotes(char *b);
+char	*handledquotes(char *b);
+char	*singledollar(char *b);
+char	*handlepiddis(char *b);
 
 #endif
