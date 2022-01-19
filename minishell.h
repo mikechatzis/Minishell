@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/18 18:24:59 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/19 14:36:32 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ char	*handlesquotes(char *b);
 char	*handledquotes(char *b);
 char	*singledollar(char *b);
 char	*handlepiddis(char *b);
+int		isnumeric(char *b);
 
 #endif

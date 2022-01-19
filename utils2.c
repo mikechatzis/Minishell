@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/18 19:52:27 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/19 15:39:50 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*printvar(char *s)
 	while (*s)
 	{
 		i = 1;
-		while (s[i] && s[i] != ' ' && s[i] != '$')
+		while (s[i] && s[i] != ' ' && s[i] != '$' && s[i] != '"' && s[i] != '\'')
 			i++;
 		name = ft_substr(&s[1], 0, i - 1);
 		if (!*name)
@@ -99,16 +99,20 @@ char	*printvar(char *s)
 				handlepiddis(s);	
 				s += 2;
 			}
-			else if (!s[1] || s[1] == ' ' || s[1] == '"')
+			else if (!s[1] || s[1] == ' ' || s[1] == '"' || s[1] == '\'')
 			{
 				printf("$");
 				s += 1;
 			}
-			
 		}
 		else if (s[1] == '0')
 		{
 			printf("minishell");	
+			s += 2;
+		}
+		else if (s[1] == '#')
+		{
+			printf("0");
 			s += 2;
 		}
 		else

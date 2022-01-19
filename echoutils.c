@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/18 19:47:10 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/19 15:30:59 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*handlesquotes(char *b)
 		i++;
 	buff = ft_substr(b, 0, i);
 	printf("%s", buff);
-	b += ft_strlen(buff);
+	b += ft_strlen(buff) + 1;
 	free(buff);
 	return (b);
 }
@@ -46,7 +46,7 @@ char	*handledquotes(char *b)
 	while (b[i] && b[i] != '"')
 		i++;
 	buff = ft_substr(b, 0, i);
-	b += ft_strlen(buff);
+	b += ft_strlen(buff) + 1;
 	i = ft_strlen(buff);
 	while (*buff)
 	{

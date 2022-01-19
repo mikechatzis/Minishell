@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/13 17:17:16 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/19 15:11:28 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,42 @@ char	**processinput(char	*b)
 	s = ft_split(b, ' ');
 	ret = malloc(1000);
 	while (s[++i])
+	{
 		ret[i] = ft_strtrim(s[i], "'\"");
+		if (isnumeric(ret[i]))
+			ft_bzero(ret[i], ft_strlen(s[i]));
+	}	
 	ret[i] = 0;
 	i = 0;
 	free(s);
 	return(ret);
+}
+
+int	isnumeric(char *b)
+{
+	int		i;
+	int		j;
+	char	*n;
+
+	i= -1;
+	j = 0;
+	while (b[++i] && b[i] != '=')
+	{
+		if (!ft_isdigit(b[i]))
+			j = 1;
+	}
+	i = -1;
+	while (b[++i] && b[i] != '=')
+	{
+		if (b[i] == '#')
+			j = 0;
+	}
+	if (!j)
+	{
+		n = ft_substr(b, 0, i);
+		printf("export: name not valid in this context: %s\n", n);
+		free(n);
+		return (1);
+	}
+	return (0);
 }
