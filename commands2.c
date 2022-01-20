@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/13 17:19:50 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:07:02 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	execexport(char *b)
 	int		i;
 	int		c;
 	char	**s;
-	
+
 	b += 6;
 	i = 0;
 	c = -1;
@@ -26,13 +26,13 @@ void	execexport(char *b)
 	s = processinput(b);
 	while (s[++c])
 	{
-		while (ENV[i] && (!namecmp(ENV[i], s[c]) || !ENV[i][0]))
+		while (g_env[i] && (!namecmp(g_env[i], s[c]) || !g_env[i][0]))
 			i++;
 		if (ft_strchr(s[c], '='))
 		{
-			if (ENV[i])
-				free(ENV[i]);
-				ENV[i] = ft_strdup(s[c]);
+			if (g_env[i])
+				free(g_env[i]);
+				g_env[i] = ft_strdup(s[c]);
 		}
 		i = 0;
 	}
@@ -53,9 +53,9 @@ void	execunset(char *b)
 	s = processinput(b);
 	while (s[++c])
 	{
-		while (ENV[++i])
-			if (!namecmpu(ENV[i], s[c]))
-				ft_bzero(ENV[i], ft_strlen(ENV[i]));
+		while (g_env[++i])
+			if (!namecmpu(g_env[i], s[c]))
+				ft_bzero(g_env[i], ft_strlen(g_env[i]));
 		i = -1;
 	}
 	free(s);
@@ -74,29 +74,14 @@ void	execenv(char *b)
 	s = ft_strjoin("export ", &b[3]);
 	sub = ft_strnstr(b, "./", ft_strlen(b));
 	sav = saveenv();
-	while (sp[i] && (ft_strchr(sp[i], '=') || (!ft_strncmp(sp[i], "env", 3) && i == 0)))
+	while (sp[i] && (ft_strchr(sp[i], '=')
+			|| (!ft_strncmp(sp[i], "env", 3) && i == 0)))
 		i++;
 	execexport(s);
 	if (sp[i] && !ft_strchr(sp[i], '='))
-	{
-		if (!ft_strnstr(sp[i], "./", ft_strlen(sp[i])))
-			printf("./%s: no such file or directory\n", sp[i]);
-		else if (sub)
-			exec(sub);
-		else
-		{
-			free(s);
-			s = ft_strjoin("./", sp[i]);
-			exec(s);
-		}
-	}
+		execinenv(i, s, sub, sp);
 	else
-	{
-		i = -1;
-		while (ENV[++i])
-			if (ENV[i][0])
-				printf("%s\n", ENV[i]);
-	}
+		printenv();
 	restoreenv(sav);
 	free3(s, sp, sav);
 }

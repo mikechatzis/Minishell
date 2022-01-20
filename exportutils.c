@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echoutils.c                                        :+:      :+:    :+:   */
+/*   exportutils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/20 14:50:28 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:41:01 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*handlespace(char *b)
-{
-	printf(" ");
-	while (*b == ' ')
-		b++;
-	return (b);
-}
 
 char	*handlesquotes(char *b)
 {
@@ -61,16 +53,37 @@ char	*handledquotes(char *b)
 	return (b);
 }
 
-char	*singledollar(char *b)
+char	*handlespacexp(char *b)
 {
-	printf("$");
-	b += 1;
+	printf(" ");
+	while (*b == ' ')
+		b++;
 	return (b);
 }
 
-char	*handlepiddis(char *b)
+char	*handlescharsxp(char	*b)
 {
-	b += 2;
-	printf("%d", getpid());
+	if (*b == ' ')
+		b = handlespace(b);
+	if (*b == '\'')
+		b = handlesquotes(b);
+	if (*b == '"')
+		b = handledquotes(b);
+	if (*b == '$')
+		b = printvar(b);
+	if (*b != ' ' && *b != '$' && *b != '\'' && *b != '"')
+	{
+		printf("%c", *b);
+		b++;
+	}
 	return (b);
+}
+
+char	*exportout(char *b)
+{
+	char	*buff;
+
+	while (*b)
+		b = handlescharsxp(b);
+	return (buff);
 }

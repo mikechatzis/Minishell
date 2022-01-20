@@ -9,4 +9,5 @@ int main(int argc, char **argv)
 		printf("test successful with args\n");
 	else
 		printf("test successful without args\n");
+	return (0);
 }

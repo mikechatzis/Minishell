@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/19 15:39:50 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:03:43 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,35 +19,19 @@ int	echoerrcheck(char *b)
 	i = -1;
 	while (b[++i])
 	{
-		if (b[i] == '\'')
-		{
-			while (b[++i] != '\'')
-			{
-				if (!b[i])
-				{
-					write(2, "missing quote>\n", 15);
-					return (-1);
-				}
-			}
-		}
-		if (b[i] == '"')
-		{
-			while (b[++i] != '"')
-			{
-				if (!b[i])
-				{
-					write(2, "missing dquote>\n", 16);
-					return (-1);
-				}
-			}
-		}
+		i = squoteerr(i, b);
+		if (i == -1)
+			return (-1);
+		i = dquoteerr(i, b);
+		if (i == -1)
+			return (-1);
 	}
 	return (0);
 }
 
 int	namecmp(char *s, char *b)
 {
-	while(*s && *b)
+	while (*s && *b)
 	{
 		if (*s != *b)
 			break ;
@@ -89,42 +73,36 @@ char	*printvar(char *s)
 	while (*s)
 	{
 		i = 1;
-		while (s[i] && s[i] != ' ' && s[i] != '$' && s[i] != '"' && s[i] != '\'')
+		while (s[i] && s[i] != ' '
+			&& s[i] != '$' && s[i] != '"' && s[i] != '\'')
 			i++;
 		name = ft_substr(&s[1], 0, i - 1);
 		if (!*name)
-		{
-			if (s[1] == '$')
-			{
-				handlepiddis(s);	
-				s += 2;
-			}
-			else if (!s[1] || s[1] == ' ' || s[1] == '"' || s[1] == '\'')
-			{
-				printf("$");
-				s += 1;
-			}
-		}
-		else if (s[1] == '0')
-		{
-			printf("minishell");	
-			s += 2;
-		}
-		else if (s[1] == '#')
-		{
-			printf("0");
-			s += 2;
-		}
+			s = emptyname(s);
+		else if (s[1] == '0' || s[1] == '#')
+			s = zeroorhash(s);
 		else
 		{
-			b = parseenv(ENV, name);
-			printf("%s", b);
-			s += ft_strlen(name) + 1;
-			free(b);
+			b = parseenv(g_env, name);
+			s = allelse(b, s, name);
 		}
 		free(name);
 		if (*s != '$')
 			break ;
 	}
 	return (s);
+}
+
+void	execinenv(int i, char *s, char *sub, char **sp)
+{
+	if (!ft_strnstr(sp[i], "./", ft_strlen(sp[i])))
+		printf("./%s: no such file or directory\n", sp[i]);
+	else if (sub)
+		exec(sub);
+	else
+	{
+		free(s);
+		s = ft_strjoin("./", sp[i]);
+		exec(s);
+	}
 }

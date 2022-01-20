@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/17 14:51:55 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:34:10 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	dhandler(int signum)
 {
 	if (signum == SIGINT)
 	{
-			write(2, "\n", 1);
-			rl_on_new_line();
-			//rl_replace_line("", 0);
-			rl_redisplay();
+		write(2, "\n", 1);
+		rl_on_new_line();
+		//rl_replace_line("", 0);
+		rl_redisplay();
 	}
 	else if (signum == SIGQUIT)
 	{

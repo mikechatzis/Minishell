@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/10 17:06:09 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:43:09 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,13 @@ char	*saveenv(void)
 	k = -1;
 	s = malloc(1000);
 	ft_bzero(s, 1000);
-	while (ENV[++j])
+	while (g_env[++j])
 	{
-		while (ENV[j][++i])
-			s[++k] = ENV[j][i];
+		while (g_env[j][++i])
+			s[++k] = g_env[j][i];
 		s[++k] = ' ';
 		i = -1;
 	}
-	//printf("%s\n", s);
 	return (s);
 }
 
@@ -59,12 +58,12 @@ void	restoreenv(char *s)
 	char	**sp;
 
 	i = -1;
-	free(ENV);
-	ENV = malloc(1000 * sizeof(char *));
+	free(g_env);
+	g_env = malloc(1000 * sizeof(char *));
 	sp = ft_split(s, ' ');
 	while (sp[++i])
-		ENV[i] = ft_strdup(sp[i]);
-	ENV[999] = 0;
+		g_env[i] = ft_strdup(sp[i]);
+	g_env[999] = 0;
 	free(sp);
 }
 
@@ -74,4 +73,3 @@ void	free3(void *s, void *sp, void *sav)
 	free(sp);
 	free(sav);
 }
- 

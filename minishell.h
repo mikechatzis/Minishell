@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/19 14:36:32 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:06:44 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@
 # include <stdbool.h>
 # include "libft/libft.h"
 
-char	**ENV;
-bool	g_sigsent;
+char	**g_env;
 
 typedef struct s_nums
 {
@@ -49,7 +48,7 @@ void	ukncommand(char *b);
 int		sighandler(void);
 void	exececho(char *b);
 int		countchar(char *s, char c);
-int		prints (char *s, t_nums *n);
+int		prints(char *s, t_nums *n);
 int		echoerrcheck(char *b);
 void	execexport(char *b);
 void	execunset(char *b);
@@ -70,5 +69,14 @@ char	*handledquotes(char *b);
 char	*singledollar(char *b);
 char	*handlepiddis(char *b);
 int		isnumeric(char *b);
+char	*handleschars(char	*b);
+void	execseq(char *b, char **rpaths, char **argvs, char *fpath);
+char	*emptyname(char *s);
+char	*zeroorhash(char *s);
+char	*allelse(char *b, char *s, char *name);
+int		squoteerr(int i, char *b);
+int		dquoteerr(int i, char *b);
+void	execinenv(int i, char *s, char *sub, char **sp);
+void	printenv(void);
 
 #endif
