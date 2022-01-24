@@ -6,13 +6,13 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/20 16:41:01 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/24 18:17:44 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*handlesquotes(char *b)
+static char	*handlesquotesxp(char *b, int fd)
 {
 	char	*buff;
 	int		i;
@@ -22,13 +22,13 @@ char	*handlesquotes(char *b)
 	while (b[i] && b[i] != '\'')
 		i++;
 	buff = ft_substr(b, 0, i);
-	printf("%s", buff);
+	dprintf(fd, "%s", buff);
 	b += ft_strlen(buff) + 1;
 	free(buff);
 	return (b);
 }
 
-char	*handledquotes(char *b)
+static char	*handledquotesxp(char *b, int fd)
 {
 	char	*buff;
 	int		i;
@@ -43,8 +43,8 @@ char	*handledquotes(char *b)
 	while (*buff)
 	{
 		if (*buff == '$')
-			buff = printvar(buff);
-		printf("%c", *buff);
+			buff = printvarxp(buff, fd);
+		dprintf(fd, "%c", *buff);
 		if (*buff)
 			buff++;
 	}
@@ -53,27 +53,28 @@ char	*handledquotes(char *b)
 	return (b);
 }
 
-char	*handlespacexp(char *b)
+static char	*handlespacexp(char *b, int fd)
 {
-	printf(" ");
+	dprintf(fd, " ");
 	while (*b == ' ')
 		b++;
 	return (b);
 }
 
-char	*handlescharsxp(char	*b)
+static char	*handlescharsxp(char *b, int fd)
 {
 	if (*b == ' ')
-		b = handlespace(b);
+		b = handlespacexp(b, fd);
 	if (*b == '\'')
-		b = handlesquotes(b);
+		b = handlesquotesxp(b, fd);
 	if (*b == '"')
-		b = handledquotes(b);
+		b = handledquotesxp(b, fd);
 	if (*b == '$')
-		b = printvar(b);
+		b = printvarxp(b, fd);
 	if (*b != ' ' && *b != '$' && *b != '\'' && *b != '"')
 	{
-		printf("%c", *b);
+		if ((dprintf(fd, "%c", *b)) == -1)
+			perror("");
 		b++;
 	}
 	return (b);
@@ -81,9 +82,20 @@ char	*handlescharsxp(char	*b)
 
 char	*exportout(char *b)
 {
-	char	*buff;
+	int		fd;
+	int		i;
+	char	c;
+	char	*ret;
 
+	fd = open("exporttmpfile", O_CREAT | O_TRUNC | O_RDWR, 0755);
+	i = 0;
+	ret = malloc(1000);
 	while (*b)
-		b = handlescharsxp(b);
-	return (buff);
+		b = handlescharsxp(b, fd);
+	lseek(fd, 0, SEEK_SET);
+	while ((read(fd, &c, 1)))
+		ret[i++] = c;
+	ret[i] = 0;
+	close(fd);
+	return (ret);
 }

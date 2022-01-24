@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/20 15:36:47 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:47:29 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,18 @@ void	exececho(char *b)
 	i = 0;
 	if (echoerrcheck(b))
 		return ;
-	if (ft_strnstr(b, "-n", 7))
+	if (ft_strnstr(b, "-n", 8))
 	{
-		b += 7;
+		b += 5;
+		b = handlenflag(b);
 		i = 1;
 	}	
 	else
 		b += 5;
-	while (*b == ' ' && *b)
+	while (*b == ' ')
 		b++;
 	while (*b)
 		b = handleschars(b);
-	if (i)
-		printf("%%\n");
-	else
+	if (!i)
 		printf("\n");
 }

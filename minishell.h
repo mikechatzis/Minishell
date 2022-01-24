@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/20 16:06:44 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/24 19:25:29 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_nums
 	int		envi;
 	int		print;
 	bool	sig;
+	char	*envbuff;
 }	t_nums;
 
 void	execls(char *b);
@@ -78,5 +79,9 @@ int		squoteerr(int i, char *b);
 int		dquoteerr(int i, char *b);
 void	execinenv(int i, char *s, char *sub, char **sp);
 void	printenv(void);
+char	*handlenflag(char *b);
+char	*exportout(char *b);
+char	*printvarxp(char *s, int fd);
+void	evalquotes(char	*s);
 
 #endif

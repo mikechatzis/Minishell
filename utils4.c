@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/20 16:27:22 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/24 19:09:07 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,32 @@ void	setenviron(void)
 char	**processinput(char	*b)
 {
 	char	**s;
-	char	**ret;
 	int		i;
 
 	i = -1;
 	s = ft_split(b, ' ');
-	ret = malloc(1000);
 	while (s[++i])
 	{
-		ret[i] = ft_strtrim(s[i], "'\"");
-		if (isnumeric(ret[i]))
-			ft_bzero(ret[i], ft_strlen(s[i]));
-	}	
-	ret[i] = 0;
+		if (isnumeric(s[i]))
+			ft_bzero(s[i], ft_strlen(s[i]));
+	}
 	i = 0;
-	free(s);
-	return (ret);
+	return (s);
+}
+
+static int	nameeval(char *b)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = -1;
+	while (b[++i] && b[i] != '=')
+	{
+		if (!ft_isdigit(b[i]))
+			j = 1;
+	}
+	return (j);
 }
 
 int	isnumeric(char *b)
@@ -77,19 +87,18 @@ int	isnumeric(char *b)
 
 	i = -1;
 	j = 0;
-	while (b[++i] && b[i] != '=')
-	{
-		if (!ft_isdigit(b[i]))
-			j = 1;
-	}
+	j = nameeval(b);
 	i = -1;
 	while (b[++i] && b[i] != '=')
-	{
 		if (b[i] == '#')
 			j = 0;
-	}
 	if (!j)
 	{
+		if (*b == '\'' || *b == '"')
+		{
+			b++;
+			i--;
+		}
 		n = ft_substr(b, 0, i);
 		printf("export: name not valid in this context: %s\n", n);
 		free(n);

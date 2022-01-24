@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/20 16:07:02 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/24 19:25:18 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	execexport(char *b)
 		{
 			if (g_env[i])
 				free(g_env[i]);
-				g_env[i] = ft_strdup(s[c]);
+			g_env[i] = exportout(s[c]);
+			evalquotes(g_env[i]);
 		}
 		i = 0;
 	}
@@ -84,4 +85,24 @@ void	execenv(char *b)
 		printenv();
 	restoreenv(sav);
 	free3(s, sp, sav);
+}
+
+void	evalquotes(char	*s)
+{
+	char	*n;
+	int		i;
+
+	i = -1;
+	while (s[++i] && s[i] != '=')
+	{
+		if (s[i] == '\'' || s[i] == '"')
+		{
+			while (s[i] && s[i] != '=')
+				i++;
+			n = ft_substr(s, 0, i);
+			printf("export: name not valid in this context: %s\n", n);
+			free(n);
+			return ;
+		}
+	}
 }
