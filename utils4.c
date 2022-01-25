@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/25 14:53:26 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:12:35 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	setenviron2(void)
 	g_env[17] = ft_strjoin("TERM_PROGRAM_VERSION=",
 			getenv("TERM_PROGRAM_VERSION"));
 	g_env[21] = ft_strjoin("_=", getenv("_"));
+	g_env[22] = ft_strjoin("OLDPWD=", getenv("OLDPWD"));
 }
 
 void	setenviron(void)

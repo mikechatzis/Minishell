@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/25 15:03:48 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:15:20 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	execcd(char *b)
 	if (chdir(buff))
 		perror(buff);
 	tmp = getcwd(tmp, 100);
+	free(g_env[22]);
+	g_env[22] = ft_strjoin("OLD", g_env[1]);
 	free(g_env[1]);
 	g_env[1] = ft_strjoin("PWD=", tmp);
 	free(tmp);
