@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/24 13:08:29 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/25 14:51:44 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ int	main(void)
 	while (1)
 	{
 		sigx = sighandler();
-		printf("Mike's minishell %% ");
-		b = readline(NULL);
+		b = readline("Mike's minishell % ");
 		if (b)
 		{
 			loghistory(b, nums);

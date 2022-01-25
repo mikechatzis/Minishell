@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/25 12:22:16 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/25 14:53:26 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ char	**processinput(char	*b)
 	int		i;
 
 	i = -1;
+	while (*b == ' ')
+		b++;
 	s = xportsplit(b);
 	while (s[++i])
 	{

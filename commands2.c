@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/25 13:28:01 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/25 14:54:04 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	execexport(char *b)
 	int		c;
 	char	**s;
 
-	b += 7;
+	b += 6;
 	i = 0;
 	c = -1;
 	if (echoerrcheck(b))
@@ -81,7 +81,7 @@ void	evalquotes(char	*s)
 			while (s[i] && s[i] != '=')
 				i++;
 			n = ft_substr(s, 0, i);
-			printf("export: name not valid in this context: %s\n", n);
+			printf("export/unset: name not valid in this context: %s\n", n);
 			free(n);
 			return ;
 		}
