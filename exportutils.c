@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/24 18:17:44 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:52:16 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,10 @@ char	*exportout(char *b)
 
 	fd = open("exporttmpfile", O_CREAT | O_TRUNC | O_RDWR, 0755);
 	i = 0;
+	if (echoerrcheck(b))
+		return ("");
+	while (*b == ' ')
+		b++;
 	ret = malloc(1000);
 	while (*b)
 		b = handlescharsxp(b, fd);

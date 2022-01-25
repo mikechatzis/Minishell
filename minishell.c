@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/25 14:51:44 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:43:49 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	initialise(t_nums *nums)
 int	main(void)
 {
 	char	*b;
+	char	*buff;
 	t_nums	*nums;
 	int		sigx;
 
@@ -55,9 +56,10 @@ int	main(void)
 		b = readline("Mike's minishell % ");
 		if (b)
 		{
-			loghistory(b, nums);
-			parseargs(b);
-			free(b);
+			buff = ft_strdup(exportout(b));
+			loghistory(buff, nums);
+			parseargs(buff);
+			free(buff);
 		}
 		if (!b)
 		{

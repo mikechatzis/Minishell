@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/25 15:15:20 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:40:19 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,20 @@ void	execprog(char *b)
 	char	**argvs;
 	char	*tmp;
 	char	*fpath;
+	char	*buff;
 
+	while (*b == ' ')
+		b++;
 	g_env[0] += 5;
+	buff = ft_strdup(exportout(b));
 	rpaths = ft_split(g_env[0], ':');
-	argvs = ft_split(b, ' ');
+	argvs = xportsplit(buff);
 	tmp = ft_strjoin(*rpaths, "/");
 	fpath = ft_strjoin(tmp, &argvs[0][2]);
 	free(tmp);
 	execseq(b, rpaths, argvs, fpath);
 	free3(rpaths, argvs, fpath);
+	free(buff);
 }
 
 void	exececho(char *b)
