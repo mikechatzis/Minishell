@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/21 14:47:29 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:03:48 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,21 @@ void	execpwd(void)
 void	execcd(char *b)
 {
 	char	*tmp;
+	char	*buff;
 
 	tmp = malloc(100);
 	while (*b != ' ' && *b)
 		b++;
-	b++;
-	if (chdir(b))
-		perror(b);
+	while (*b == ' ')
+		b++;
+	buff = ft_strdup(exportout(b));
+	if (chdir(buff))
+		perror(buff);
 	tmp = getcwd(tmp, 100);
 	free(g_env[1]);
 	g_env[1] = ft_strjoin("PWD=", tmp);
 	free(tmp);
+	free(buff);
 }
 
 void	execprog(char *b)
