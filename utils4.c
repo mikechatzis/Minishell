@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/24 19:09:07 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/25 12:22:16 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	**processinput(char	*b)
 	int		i;
 
 	i = -1;
-	s = ft_split(b, ' ');
+	s = xportsplit(b);
 	while (s[++i])
 	{
 		if (isnumeric(s[i]))

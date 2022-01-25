@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/24 19:25:18 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/25 13:28:01 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	execexport(char *b)
 	int		c;
 	char	**s;
 
-	b += 6;
+	b += 7;
 	i = 0;
 	c = -1;
 	if (echoerrcheck(b))
@@ -26,18 +26,18 @@ void	execexport(char *b)
 	s = processinput(b);
 	while (s[++c])
 	{
-		while (g_env[i] && (!namecmp(g_env[i], s[c]) || !g_env[i][0]))
-			i++;
+		i = incrementi(i, s[c]);
 		if (ft_strchr(s[c], '='))
 		{
 			if (g_env[i])
 				free(g_env[i]);
-			g_env[i] = exportout(s[c]);
+			g_env[i] = ft_strdup(exportout(s[c]));
 			evalquotes(g_env[i]);
 		}
 		i = 0;
 	}
 	free(s);
+	cleartrash(g_env);
 }
 
 void	execunset(char *b)
@@ -64,27 +64,8 @@ void	execunset(char *b)
 
 void	execenv(char *b)
 {
-	int		i;
-	char	*s;
-	char	*sav;
-	char	*sub;
-	char	**sp;
-
-	i = 0;
-	sp = ft_split(b, ' ');
-	s = ft_strjoin("export ", &b[3]);
-	sub = ft_strnstr(b, "./", ft_strlen(b));
-	sav = saveenv();
-	while (sp[i] && (ft_strchr(sp[i], '=')
-			|| (!ft_strncmp(sp[i], "env", 3) && i == 0)))
-		i++;
-	execexport(s);
-	if (sp[i] && !ft_strchr(sp[i], '='))
-		execinenv(i, s, sub, sp);
-	else
+	if (b)
 		printenv();
-	restoreenv(sav);
-	free3(s, sp, sav);
 }
 
 void	evalquotes(char	*s)
@@ -106,3 +87,27 @@ void	evalquotes(char	*s)
 		}
 	}
 }
+
+/*ADDITIONAL ENV (IF NEEDED)*/
+
+	// int	i;
+	// char	*s;
+	// char	*sav;
+	// char	*sub;
+	// char	**sp;
+
+	// i = 0;
+	// sp = ft_split(b, ' ');
+	// s = ft_strjoin("export ", &b[3]);
+	// sub = ft_strnstr(b, "./", ft_strlen(b));
+	// sav = saveenv();
+	// while (sp[i] && (ft_strchr(sp[i], '=')
+	// 		|| (!ft_strncmp(sp[i], "env", 3) && i == 0)))
+	// 	i++;
+	// execexport(s);
+	// if (sp[i] && !ft_strchr(sp[i], '='))
+	// 	execinenv(i, s, sub, sp);
+	// else
+
+	// restoreenv(sav);
+	// free3(s, sp, sav);
