@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/25 13:23:58 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/26 15:58:28 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,11 @@ void	evalquotes(char	*s);
 char	**xportsplit(char *b);
 void	cleartrash(char **b);
 int		incrementi(int i, char *s);
+int		sq(char *b, int i);
+int		dq(char *b, int i);
+char	**finn(char *b, char **ret, int j);
+void	initparse(char	*b, t_nums *nums);
+char	**checkpipesnredirs(char *b);
+void	parseargs(char *b);
 
 #endif
