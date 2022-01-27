@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/26 15:58:28 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/27 13:04:16 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <dirent.h>
 # include <signal.h>
 # include <stdbool.h>
+# include <stdlib.h>
 # include "libft/libft.h"
 
 char	**g_env;
@@ -46,7 +47,7 @@ void	loghistory(char *b, t_nums *nums);
 void	execprog(char *b);
 void	exec(char *b);
 void	ukncommand(char *b);
-int		sighandler(void);
+void	sighandler(void);
 void	exececho(char *b);
 int		countchar(char *s, char c);
 int		prints(char *s, t_nums *n);
@@ -62,7 +63,7 @@ void	execenv(char *b);
 char	*saveenv(void);
 void	restoreenv(char *s);
 void	free3(void *s, void *sp, void *sav);
-void	setenviron(void);
+void	setenviron(t_nums *n);
 char	**processinput(char	*b);
 char	*handlespace(char *b);
 char	*handlesquotes(char *b);

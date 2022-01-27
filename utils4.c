@@ -6,13 +6,13 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/25 15:12:35 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:49:35 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	setenviron2(void)
+void	setenviron2(t_nums *n)
 {
 	g_env[8] = ft_strjoin("__CF_USER_TEXT_ENCODING=",
 			getenv("__CF_USER_TEXT_ENCODING"));
@@ -22,9 +22,11 @@ void	setenviron2(void)
 			getenv("TERM_PROGRAM_VERSION"));
 	g_env[21] = ft_strjoin("_=", getenv("_"));
 	g_env[22] = ft_strjoin("OLDPWD=", getenv("OLDPWD"));
+	g_env[998] = ft_itoa(0);
+	g_env[997] = (char *)n;
 }
 
-void	setenviron(void)
+void	setenviron(t_nums *n)
 {
 	g_env = malloc(1000 * sizeof(char *));
 	g_env[0] = ft_strjoin("PATH=", getenv("PATH"));
@@ -45,7 +47,7 @@ void	setenviron(void)
 	g_env[18] = ft_strjoin("LANG=", getenv("LANG"));
 	g_env[19] = ft_strjoin("COLORTERM=", getenv("COLORTERM"));
 	g_env[20] = ft_strjoin("GIT_ASKPASS=", getenv("GIT_ASKPASS"));
-	setenviron2();
+	setenviron2(n);
 	g_env[999] = 0;
 }
 

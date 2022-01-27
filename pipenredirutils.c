@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/26 17:08:12 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/27 11:58:29 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ bool	checkstrayops(char *b)
 
 void	initparse(char	*b, t_nums *nums)
 {
-	char	*buff;
 	char	**pr;
 
 	loghistory(b, nums);
@@ -71,7 +70,7 @@ void	initparse(char	*b, t_nums *nums)
 	if (!*pr)
 	{
 		free(pr);
-		return ;	
+		return ;
 	}
 	if (!pr[1])
 	{
@@ -80,9 +79,7 @@ void	initparse(char	*b, t_nums *nums)
 			free(pr);
 			return ;
 		}
-		buff = ft_strdup(exportout(b));
-		parseargs(buff);
-		free(buff);
+		parseargs(b);
 		free(pr);
 	}
 	//else to be added for pipes/redirections handling

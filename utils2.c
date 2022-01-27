@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/20 16:03:43 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:22:34 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*printvar(char *s)
 		name = ft_substr(&s[1], 0, i - 1);
 		if (!*name)
 			s = emptyname(s);
-		else if (s[1] == '0' || s[1] == '#')
+		else if (s[1] == '0' || s[1] == '#' || s[1] == '?')
 			s = zeroorhash(s);
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/20 15:55:08 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:13:59 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ char	*emptyname(char *s)
 
 char	*zeroorhash(char *s)
 {
+	int	status;
+
+	wait(&status);
 	if (s[1] == '0')
 	{
 		printf("minishell");
@@ -82,6 +85,11 @@ char	*zeroorhash(char *s)
 	else if (s[1] == '#')
 	{
 		printf("0");
+		s += 2;
+	}
+	else if (s[1] == '?')
+	{
+		printf("%s", g_env[998]);
 		s += 2;
 	}
 	return (s);

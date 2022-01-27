@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/24 17:13:37 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/27 12:13:37 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ char	*zeroorhashxp(char *s, int fd)
 		dprintf(fd, "0");
 		s += 2;
 	}
+	else if (s[1] == '?')
+	{
+		dprintf(fd, "%s", g_env[998]);
+		s += 2;
+	}
 	return (s);
 }
 
@@ -72,7 +77,7 @@ char	*printvarxp(char *s, int fd)
 		name = ft_substr(&s[1], 0, i - 1);
 		if (!*name)
 			s = emptynamexp(s, fd);
-		else if (s[1] == '0' || s[1] == '#')
+		else if (s[1] == '0' || s[1] == '#' || s[1] == '?')
 			s = zeroorhashxp(s, fd);
 		else
 		{

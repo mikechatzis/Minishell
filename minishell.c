@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/26 16:43:58 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/27 13:30:03 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,20 +93,21 @@ void	initialise(t_nums *nums)
 {
 	nums->hlogc = 1;
 	nums->hfd = 0;
-	setenviron();
+	nums->sig = 0;
+	setenviron(nums);
 }
 
 int	main(void)
 {
 	char	*b;
 	t_nums	*nums;
-	int		sigx;
 
 	nums = malloc(sizeof(t_nums));
 	initialise(nums);
+	signal(SIGINT, dhandler);
+	signal(SIGQUIT, dhandler);
 	while (1)
 	{
-		sigx = sighandler();
 		b = readline("Mike's minishell % ");
 		if (b)
 		{
