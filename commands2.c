@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/25 14:54:04 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/28 17:53:08 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	execexport(char *b)
 	int		c;
 	char	**s;
 
-	b += 6;
+	b = xportnmskip(b);
 	i = 0;
 	c = -1;
 	if (echoerrcheck(b))
@@ -31,8 +31,8 @@ void	execexport(char *b)
 		{
 			if (g_env[i])
 				free(g_env[i]);
+			evalquotes(exportout(s[c]));
 			g_env[i] = ft_strdup(exportout(s[c]));
-			evalquotes(g_env[i]);
 		}
 		i = 0;
 	}

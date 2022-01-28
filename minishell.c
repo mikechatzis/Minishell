@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/27 13:30:03 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/28 17:34:33 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,26 @@ char	**checkpipesnredirs(char *b)
 	return (finn(b, ret, j));
 }
 
-void	parseargs(char *b)
+void	parseargs(char *b, char *buff, char *name)
 {
-	if (!ft_strncmp(b, "ls", 2))
-		execls(b);
-	else if (!ft_strncmp(b, "pwd", 3))
+	if (!ft_strncmp(name, "ls", ft_strlen(name)))
+		execls(buff);
+	else if (!ft_strncmp(name, "pwd", ft_strlen(name)))
 		execpwd();
-	else if (!ft_strncmp(b, "cd", 2))
-		execcd(b);
-	else if (!ft_strncmp(b, "./", 2))
-		exec(b);
-	else if (!ft_strncmp(b, "echo", 4))
-		exececho(b);
-	else if (!ft_strncmp(b, "export", 6))
+	else if (!ft_strncmp(name, "cd", ft_strlen(name)))
+		execcd(buff);
+	else if (!ft_strncmp(name, "./", ft_strlen(name)))
+		exec(buff);
+	else if (!ft_strncmp(name, "echo", ft_strlen(name)))
+		exececho(buff);
+	else if (!ft_strncmp(name, "export", ft_strlen(name)))
 		execexport(b);
-	else if (!ft_strncmp(b, "unset", 5))
-		execunset(b);
-	else if (!ft_strncmp(b, "env", 3))
-		execenv(b);
+	else if (!ft_strncmp(name, "unset", ft_strlen(name)))
+		execunset(buff);
+	else if (!ft_strncmp(name, "env", ft_strlen(name)))
+		execenv(buff);
 	else
-		ukncommand(b);
+		ukncommand(buff);
 }
 
 void	initialise(t_nums *nums)
@@ -111,7 +111,8 @@ int	main(void)
 		b = readline("Mike's minishell % ");
 		if (b)
 		{
-			initparse(b, nums);
+			loghistory(b, nums);
+			initparse(b);
 			free(b);
 		}
 		if (!b)

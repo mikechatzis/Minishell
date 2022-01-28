@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/27 13:23:32 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/28 17:15:28 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ void	ft_freeall(size_t ptrnum, void	*p, ...)
 	free(p);
 	while (i++ < ptrnum)
 	{
-		printf("%p\n", pt);
 		free(pt);
 		pt = va_arg(args, void *);
-		printf("%p\n", pt);
 	}
 	va_end(args);
 }

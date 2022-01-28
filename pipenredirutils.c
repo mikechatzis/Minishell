@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/27 11:58:29 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/28 17:37:26 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	sq(char *b, int i)
 {
-	if (b[i] == '\'')
+	if (b[i] && b[i] == '\'')
 	{
-		while (b[++i] != '\'')
+		while (b[i] && b[++i] != '\'')
 			continue ;
 		i++;
 	}
@@ -25,9 +25,9 @@ int	sq(char *b, int i)
 
 int	dq(char *b, int i)
 {
-	if (b[i] == '"')
+	if (b[i] && b[i] == '"')
 	{
-		while (b[++i] != '"')
+		while (b[i] && b[++i] != '"')
 			continue ;
 		i++;
 	}
@@ -59,13 +59,15 @@ bool	checkstrayops(char *b)
 	return (false);
 }
 
-void	initparse(char	*b, t_nums *nums)
+void	initparse(char	*b)
 {
 	char	**pr;
+	char	*buff;
+	char	*name;
 
-	loghistory(b, nums);
 	if (echoerrcheck(b))
 		return ;
+	name = parsecmdname(b);
 	pr = checkpipesnredirs(b);
 	if (!*pr)
 	{
@@ -79,8 +81,9 @@ void	initparse(char	*b, t_nums *nums)
 			free(pr);
 			return ;
 		}
-		parseargs(b);
-		free(pr);
+		buff = exportout(b);
+		parseargs(b, buff, name);
+		free3(pr, buff, name);
 	}
 	//else to be added for pipes/redirections handling
 }

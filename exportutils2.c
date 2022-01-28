@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/27 12:13:37 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/28 16:43:30 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*handlepiddisxp(char *b, int fd)
 {
 	b += 2;
-	dprintf(fd, "%s", ft_itoa(getpid()));
+	write(fd, ft_itoa(getpid()), 5);
 	return (b);
 }
 
@@ -28,7 +28,7 @@ char	*emptynamexp(char *s, int fd)
 	}
 	else if (!s[1] || s[1] == ' ' || s[1] == '"' || s[1] == '\'')
 	{
-		dprintf(fd, "$");
+		write(fd, "$", 1);
 		s += 1;
 	}
 	return (s);
@@ -38,17 +38,17 @@ char	*zeroorhashxp(char *s, int fd)
 {
 	if (s[1] == '0')
 	{
-		dprintf(fd, "minishell");
+		write(fd, "minishell", 9);
 		s += 2;
 	}
 	else if (s[1] == '#')
 	{
-		dprintf(fd, "0");
+		write(fd, "0", 1);
 		s += 2;
 	}
 	else if (s[1] == '?')
 	{
-		dprintf(fd, "%s", g_env[998]);
+		write(fd, g_env[998], ft_strlen(g_env[998]));
 		s += 2;
 	}
 	return (s);
@@ -56,7 +56,7 @@ char	*zeroorhashxp(char *s, int fd)
 
 char	*allelsexp(char *b, char *s, char *name, int fd)
 {
-	dprintf(fd, "%s", b);
+	write(fd, b, ft_strlen(b));
 	s += ft_strlen(name) + 1;
 	free(b);
 	return (s);

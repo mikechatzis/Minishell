@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/25 15:52:16 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/28 17:40:09 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*handlesquotesxp(char *b, int fd)
 	while (b[i] && b[i] != '\'')
 		i++;
 	buff = ft_substr(b, 0, i);
-	dprintf(fd, "%s", buff);
+	write(fd, buff, ft_strlen(buff));
 	b += ft_strlen(buff) + 1;
 	free(buff);
 	return (b);
@@ -44,9 +44,11 @@ static char	*handledquotesxp(char *b, int fd)
 	{
 		if (*buff == '$')
 			buff = printvarxp(buff, fd);
-		dprintf(fd, "%c", *buff);
 		if (*buff)
+		{
+			write(fd, &*buff, 1);
 			buff++;
+		}
 	}
 	buff -= i;
 	free(buff);
@@ -55,7 +57,7 @@ static char	*handledquotesxp(char *b, int fd)
 
 static char	*handlespacexp(char *b, int fd)
 {
-	dprintf(fd, " ");
+	write(fd, " ", 1);
 	while (*b == ' ')
 		b++;
 	return (b);
@@ -71,9 +73,9 @@ static char	*handlescharsxp(char *b, int fd)
 		b = handledquotesxp(b, fd);
 	if (*b == '$')
 		b = printvarxp(b, fd);
-	if (*b != ' ' && *b != '$' && *b != '\'' && *b != '"')
+	if (*b && *b != ' ' && *b != '$' && *b != '\'' && *b != '"')
 	{
-		if ((dprintf(fd, "%c", *b)) == -1)
+		if ((write(fd, &*b, 1)) == -1)
 			perror("");
 		b++;
 	}
