@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/27 12:13:59 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/31 14:41:05 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,12 @@ void	execseq(char *b, char **rpaths, char **argvs, char *fpath)
 		while (i == -1 && *rpaths)
 		{
 			i = execve(fpath, argvs, g_env);
-			if (i == -1 && c == false)
-			{
-				c = true;
-				perror(&b[2]);
-			}
-			free(fpath);
 			rpaths++;
+			if (!*rpaths)
+				c = true;
+			if (i == -1 && c == true)
+				perror(&b[2]);
+			free(fpath);
 			tmp = ft_strjoin(*rpaths, "/");
 			fpath = ft_strjoin(tmp, &argvs[0][2]);
 			free(tmp);

@@ -6,48 +6,25 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/28 16:57:23 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/31 12:24:04 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	setenviron2(t_nums *n)
+void	setenviron(char **envp, t_nums *n)
 {
-	g_env[8] = ft_strjoin("__CF_USER_TEXT_ENCODING=",
-			getenv("__CF_USER_TEXT_ENCODING"));
-	g_env[14] = ft_strjoin("ORIGINAL_XDG_CURRENT_DESKTOP=",
-			getenv("ORIGINAL_XDG_CURRENT_DESKTOP"));
-	g_env[17] = ft_strjoin("TERM_PROGRAM_VERSION=",
-			getenv("TERM_PROGRAM_VERSION"));
-	g_env[21] = ft_strjoin("_=", getenv("_"));
-	g_env[22] = ft_strjoin("OLDPWD=", getenv("OLDPWD"));
+	size_t	i;
+
+	i = -1;
+	g_env = malloc(1000 * sizeof(char *));
+	while (*envp)
+	{
+		g_env[++i] = ft_strdup(*envp);
+		envp++;
+	}
 	g_env[998] = ft_itoa(0);
 	g_env[997] = (char *)n;
-}
-
-void	setenviron(t_nums *n)
-{
-	g_env = malloc(1000 * sizeof(char *));
-	g_env[0] = ft_strjoin("PATH=", getenv("PATH"));
-	g_env[1] = ft_strjoin("PWD=", getenv("PWD"));
-	g_env[2] = ft_strjoin("USER=", getenv("USER"));
-	g_env[3] = ft_strjoin("SECURITYSESSIONID=", getenv("SECURITYSESSIONID"));
-	g_env[4] = ft_strjoin("COMMAND_MODE=", getenv("COMMAND_MODE"));
-	g_env[5] = ft_strjoin("HOME=", getenv("HOME"));
-	g_env[6] = ft_strjoin("SHELL=", getenv("SHELL"));
-	g_env[7] = ft_strjoin("LaunchInstanceID=", getenv("LaunchInstanceID"));
-	g_env[9] = ft_strjoin("XPC_SERVICE_NAME=", getenv("XPC_SERVICE_NAME"));
-	g_env[10] = ft_strjoin("SSH_AUTH_SOCK=", getenv("SSH_AUTH_SOCK"));
-	g_env[11] = ft_strjoin("XPC_FLAGS=", getenv("XPC_FLAGS"));
-	g_env[12] = ft_strjoin("LOGNAME=", getenv("LOGNAME"));
-	g_env[13] = ft_strjoin("TMPDIR=", getenv("TMPDIR"));
-	g_env[15] = ft_strjoin("SHLVL=", getenv("SHLVL"));
-	g_env[16] = ft_strjoin("TERM_PROGRAM=", getenv("TERM_PROGRAM"));
-	g_env[18] = ft_strjoin("LANG=", getenv("LANG"));
-	g_env[19] = ft_strjoin("COLORTERM=", getenv("COLORTERM"));
-	g_env[20] = ft_strjoin("GIT_ASKPASS=", getenv("GIT_ASKPASS"));
-	setenviron2(n);
 	g_env[999] = 0;
 }
 
@@ -111,3 +88,35 @@ int	isnumeric(char *b)
 	}
 	return (0);
 }
+
+	// g_env = malloc(1000 * sizeof(char *));
+	// g_env[0] = ft_strjoin("PATH=", getenv("PATH"));
+	// g_env[1] = ft_strjoin("PWD=", getenv("PWD"));
+	// g_env[2] = ft_strjoin("USER=", getenv("USER"));
+	// // g_env[3] = ft_strjoin("SECURITYSESSIONID=",
+		// getenv("SECURITYSESSIONID"));
+	// 	printf("test\n");
+	// // g_env[4] = ft_strjoin("COMMAND_MODE=", getenv("COMMAND_MODE"));
+	// g_env[5] = ft_strjoin("HOME=", getenv("HOME"));
+	// g_env[6] = ft_strjoin("SHELL=",
+	// getenv("SHELL"));
+	// // g_env[7] = ft_strjoin("LaunchInstanceID=",
+	//getenv("LaunchInstanceID"));
+	// g_env[9] = ft_strjoin("XPC_SERVICE_NAME=", getenv("XPC_SERVICE_NAME"));
+	// g_env[10] = ft_strjoin("SSH_AUTH_SOCK=", getenv("SSH_AUTH_SOCK"));
+	// g_env[11] = ft_strjoin("XPC_FLAGS=", getenv("XPC_FLAGS"));
+	// g_env[12] = ft_strjoin("LOGNAME=", getenv("LOGNAME"));
+	// g_env[13] = ft_strjoin("TMPDIR=", getenv("TMPDIR"));
+	// g_env[15] = ft_strjoin("SHLVL=", getenv("SHLVL"));
+	// g_env[16] = ft_strjoin("TERM_PROGRAM=", getenv("TERM_PROGRAM"));
+	// g_env[18] = ft_strjoin("LANG=", getenv("LANG"));
+	// g_env[19] = ft_strjoin("COLORTERM=", getenv("COLORTERM"));
+	// g_env[20] = ft_strjoin("GIT_ASKPASS=", getenv("GIT_ASKPASS"));
+	// g_env[8] = ft_strjoin("__CF_USER_TEXT_ENCODING=",
+	// 		getenv("__CF_USER_TEXT_ENCODING"));
+	// g_env[14] = ft_strjoin("ORIGINAL_XDG_CURRENT_DESKTOP=",
+	// 		getenv("ORIGINAL_XDG_CURRENT_DESKTOP"));
+	// g_env[17] = ft_strjoin("TERM_PROGRAM_VERSION=",
+	// 		getenv("TERM_PROGRAM_VERSION"));
+	// g_env[21] = ft_strjoin("_=", getenv("_"));
+	// g_env[22] = ft_strjoin("OLDPWD=", getenv("OLDPWD"));

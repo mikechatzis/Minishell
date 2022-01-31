@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/28 17:50:57 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/31 14:31:55 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	execenv(char *b);
 char	*saveenv(void);
 void	restoreenv(char *s);
 void	free3(void *s, void *sp, void *sav);
-void	setenviron(t_nums *n);
+void	setenviron(char **envp, t_nums *n);
 char	**processinput(char	*b);
 char	*handlespace(char *b);
 char	*handlesquotes(char *b);
@@ -95,5 +95,10 @@ char	**checkpipesnredirs(char *b);
 void	parseargs(char *b, char *buff, char *name);
 char	*parsecmdname(char *b);
 char	*xportnmskip(char *b);
+size_t	empty(char *b);
+char	*format(char *b);
+void	execcmd(char *b);
+void	execcommand(char *b);
+void	execseqcmd(char *b, char **rpaths, char **argvs, char *fpath);
 
 #endif

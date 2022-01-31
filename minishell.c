@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/28 17:34:33 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/31 15:11:11 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	parseargs(char *b, char *buff, char *name)
 		execpwd();
 	else if (!ft_strncmp(name, "cd", ft_strlen(name)))
 		execcd(buff);
-	else if (!ft_strncmp(name, "./", ft_strlen(name)))
+	else if (!ft_strncmp(name, "./", 2))
 		exec(buff);
 	else if (!ft_strncmp(name, "echo", ft_strlen(name)))
 		exececho(buff);
@@ -86,24 +86,26 @@ void	parseargs(char *b, char *buff, char *name)
 	else if (!ft_strncmp(name, "env", ft_strlen(name)))
 		execenv(buff);
 	else
-		ukncommand(buff);
+		execcommand(buff);
 }
 
-void	initialise(t_nums *nums)
+void	initialise(char	**env, t_nums *nums)
 {
 	nums->hlogc = 1;
 	nums->hfd = 0;
 	nums->sig = 0;
-	setenviron(nums);
+	setenviron(env, nums);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	char	*b;
 	t_nums	*nums;
 
+	if (argc != 1 || argv[1])
+		return (1);
 	nums = malloc(sizeof(t_nums));
-	initialise(nums);
+	initialise(envp, nums);
 	signal(SIGINT, dhandler);
 	signal(SIGQUIT, dhandler);
 	while (1)

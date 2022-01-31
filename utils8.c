@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
+/*   utils8.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/31 12:51:53 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/31 14:42:24 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	loghistory(char *b, t_nums *nums)
+void	execseqcmd(char *b, char **rpaths, char **argvs, char *fpath)
 {
-	char	*s;
+	int		i;
+	bool	c;
+	char	*tmp;
 
-	if (!*b || !b)
-		return ;
-	add_history(b);
-	if (!nums->hfd)
-		nums->hfd = open("history", O_CREAT | O_APPEND | O_WRONLY, 0666);
-	if (nums->hfd <= 0)
+	c = false;
+	i = execve(argvs[0], argvs, g_env);
+	if (i == -1)
 	{
-		perror("open");
-		return ;
+		while (i == -1 && *rpaths)
+		{
+			i = execve(fpath, argvs, g_env);
+			rpaths++;
+			if (!*rpaths)
+				c = true;
+			if (i == -1 && c == true)
+				perror(b);
+			free(fpath);
+			tmp = ft_strjoin(*rpaths, "/");
+			fpath = ft_strjoin(tmp, argvs[0]);
+			free(tmp);
+		}	
 	}
-	s = ft_itoa(nums->hlogc);
-	if ((write(nums->hfd, s, ft_strlen(s))) == -1)
-		perror("write");
-	write(nums->hfd, " ", 1);
-	write(nums->hfd, b, ft_strlen(b));
-	write(nums->hfd, "\n", 1);
-	free(s);
-	nums->hlogc++;
 }

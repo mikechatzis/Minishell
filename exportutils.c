@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/28 17:40:09 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/31 13:30:28 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,18 @@ char	*exportout(char *b)
 	char	c;
 	char	*ret;
 
-	fd = open("exporttmpfile", O_CREAT | O_TRUNC | O_RDWR, 0755);
+	ret = malloc(1000);
+	fd = open("/Users/mchatzip/goinfre/Minishell/exporttmpfile",
+			O_CREAT | O_TRUNC | O_RDWR, 0755);
+	if (fd == -1)
+		perror("open: ");
+	if (fd == -1)
+		return (ret);
 	i = 0;
 	if (echoerrcheck(b))
 		return ("");
 	while (*b == ' ')
 		b++;
-	ret = malloc(1000);
 	while (*b)
 		b = handlescharsxp(b, fd);
 	lseek(fd, 0, SEEK_SET);

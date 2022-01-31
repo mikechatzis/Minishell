@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/28 16:04:35 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/31 14:11:26 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,24 @@ void	execpwd(void)
 void	execcd(char *b)
 {
 	char	*tmp;
+	int		i;
+	int		j;
 
 	tmp = malloc(100);
-	while (*b != ' ' && *b)
-		b++;
-	while (*b == ' ')
-		b++;
+	i = -1;
+	j = -1;
+	b = format(b);
 	if (chdir(b))
 		perror(b);
 	tmp = getcwd(tmp, 100);
-	free(g_env[22]);
-	g_env[22] = ft_strjoin("OLD", g_env[1]);
-	free(g_env[1]);
-	g_env[1] = ft_strjoin("PWD=", tmp);
+	while (ft_strncmp(g_env[++i], "OLDPWD", 6))
+		continue ;
+	while (ft_strncmp(g_env[++j], "PWD", 3))
+		continue ;
+	free(g_env[i]);
+	g_env[i] = ft_strjoin("OLD", g_env[j]);
+	free(g_env[j]);
+	g_env[j] = ft_strjoin("PWD=", tmp);
 	free(tmp);
 }
 
@@ -82,11 +87,15 @@ void	execprog(char *b)
 	char	**argvs;
 	char	*tmp;
 	char	*fpath;
+	int		i;
 
+	i = -1;
+	while (ft_strncmp(g_env[++i], "PATH", 4))
+		continue ;
 	while (*b == ' ')
 		b++;
-	g_env[0] += 5;
-	rpaths = ft_split(g_env[0], ':');
+	g_env[i] += 5;
+	rpaths = ft_split(g_env[i], ':');
 	argvs = xportsplit(b);
 	tmp = ft_strjoin(*rpaths, "/");
 	fpath = ft_strjoin(tmp, &argvs[0][2]);
