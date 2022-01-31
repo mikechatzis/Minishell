@@ -6,7 +6,7 @@
 #    By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/18 18:00:18 by mchatzip          #+#    #+#              #
-#    Updated: 2022/01/31 14:28:32 by mchatzip         ###   ########.fr        #
+#    Updated: 2022/01/31 15:31:59 by mchatzip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ LIBFTMAKE    = $(MAKE) -C ${LIBFT_PATH}
 all:				${NAME}
 
 ${NAME}:    ${SRCS_OBJS} pmake
-			${CC} ${CFLAGS} -g -o ${NAME} ${SRCS_OBJS} ${LIBFT_OBJS} -L/usr/local/lib -I/usr/local/include -lreadline
+			${CC} ${CFLAGS} -g -o ${NAME} ${SRCS_OBJS} ${LIBFT_OBJS} -L/usr/local/lib -I/usr/local/include -lreadline -L .brew/opt/readline/lib -I .brew/opt/readline/include
 
 pmake:
 			${LIBFTMAKE}

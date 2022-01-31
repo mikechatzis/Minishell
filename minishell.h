@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/31 14:31:55 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/31 15:47:58 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,6 @@ size_t	empty(char *b);
 char	*format(char *b);
 void	execcmd(char *b);
 void	execcommand(char *b);
-void	execseqcmd(char *b, char **rpaths, char **argvs, char *fpath);
+void	execseqcmd(char **rpaths, char **argvs, char *fpath);
 
 #endif

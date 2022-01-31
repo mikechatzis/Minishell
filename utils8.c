@@ -6,13 +6,13 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/31 14:42:24 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/01/31 15:47:53 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execseqcmd(char *b, char **rpaths, char **argvs, char *fpath)
+void	execseqcmd(char **rpaths, char **argvs, char *fpath)
 {
 	int		i;
 	bool	c;
@@ -29,7 +29,7 @@ void	execseqcmd(char *b, char **rpaths, char **argvs, char *fpath)
 			if (!*rpaths)
 				c = true;
 			if (i == -1 && c == true)
-				perror(b);
+				printf("minishell: command not found: %s\n", argvs[0]);
 			free(fpath);
 			tmp = ft_strjoin(*rpaths, "/");
 			fpath = ft_strjoin(tmp, argvs[0]);
