@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/01 16:16:00 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/01 18:20:06 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,9 @@ static int	evalchar(char *b, int i)
 		printf("syntax error close to token: '|'\n");
 		return (-1);
 	}
-	if (b[i] == '>')
-	{
-		if (b[i + 1] == '|' || b[i + 1] == '<')
-		{
-			printf("syntax error close to token: '>'\n");
-			return (-1);
-		}
-		else if (b[i + 1] == '>')
-			return (++i);
-	}
-	if (b[i] == '<')
-	{
-		if (b[i + 1] == '|' || b[i + 1] == '>')
-			printf("syntax error close to token: '<'\n");
-		if (b[i + 1] == '|' || b[i + 1] == '>')
-			return (-1);
-		else if (b[i + 1] == '<')
-			return (++i);
-	}
+	i = handlerightredir(b, i);
+	if (i != -1)
+		i = handleleftredir(b, i);
 	return (i);
 }
 

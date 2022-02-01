@@ -6,7 +6,7 @@
 #    By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/18 18:00:18 by mchatzip          #+#    #+#              #
-#    Updated: 2022/01/31 15:31:59 by mchatzip         ###   ########.fr        #
+#    Updated: 2022/02/01 18:10:06 by mchatzip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIBFT_PATH = libft/
 LIBFT_LIB  = libft.a
 
 SRCS_FILES = minishell.c commands.c commands2.c history.c utils.c utils2.c utils3.c utils4.c utils5.c echoutils.c \
-			 utils6.c exportutils.c exportutils2.c exportutils3.c pipenredirutils.c utils7.c utils8.c
+			 utils6.c exportutils.c exportutils2.c exportutils3.c pipenredirutils.c utils7.c utils8.c pipeutils.c
 				
 SRCS_OBJS  = ${SRCS_FILES:.c=.o}
 
