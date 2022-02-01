@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/01 15:39:02 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/01 16:14:57 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	handlehyphen3(char *b, char *tmp, char *ret)
 		ft_strncat(ret, tmp, ft_strlen(tmp));
 }
 
-char	*handlehyphen(char *b, char *ret, t_nums *n)
+char	*handlehyphen(char *b, char *ret)
 {	
 	char	*tmp;
 	char	*curuser;
@@ -88,9 +88,9 @@ char	*handlehyphen(char *b, char *ret, t_nums *n)
 		while (b[j] != ' ' && b[j])
 			j++;
 		curuser = ft_strdup(g_env[i]);
-		execexport(ft_strjoin("export USER=", ft_substr(b, 0, j)), n);
+		execexport(ft_strjoin("export USER=", ft_substr(b, 0, j)));
 	}
-	tmp = ft_strjoin("/Users/", exportout("$USER", n));
+	tmp = ft_strjoin("/Users/", exportout("$USER"));
 	handlehyphen3(b, tmp, ret);
 	b = handlehyphen2(b, curuser, i);
 	free(tmp);

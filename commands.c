@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/01 13:25:28 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/01 16:20:32 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ void	execcd(char *b)
 	i = -1;
 	j = -1;
 	b = format(b);
-	if (chdir(b))
+	if (!*b)
+		chdir(ft_strjoin("/Users/", exportout("$USER")));
+	else if (chdir(b))
 		perror(b);
 	tmp = getcwd(tmp, 100);
 	while (ft_strncmp(g_env[++i], "OLDPWD", 6))

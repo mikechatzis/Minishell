@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/01 15:18:09 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/01 16:14:37 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	exececho(char *b);
 int		countchar(char *s, char c);
 int		prints(char *s, t_nums *n);
 int		echoerrcheck(char *b);
-void	execexport(char *b, t_nums *n);
+void	execexport(char *b);
 void	execunset(char *b);
 char	*parseenv(char **ENV, char *name);
 char	*printvar(char *s);
@@ -82,7 +82,7 @@ int		dquoteerr(int i, char *b);
 void	execinenv(int i, char *s, char *sub, char **sp);
 void	printenv(void);
 char	*handlenflag(char *b);
-char	*exportout(char *b, t_nums *n);
+char	*exportout(char *b);
 char	*printvarxp(char *s, char *ret);
 void	evalquotes(char	*s);
 char	**xportsplit(char *b);
@@ -101,6 +101,6 @@ char	*format(char *b);
 void	execcmd(char *b);
 void	execcommand(char *b);
 void	execseqcmd(char **rpaths, char **argvs, char *fpath);
-char	*handlehyphen(char *b, char *ret, t_nums *n);
+char	*handlehyphen(char *b, char *ret);
 
 #endif

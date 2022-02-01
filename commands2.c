@@ -6,13 +6,13 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/01 15:17:26 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/01 16:12:34 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execexport(char *b, t_nums *n)
+void	execexport(char *b)
 {
 	int		i;
 	int		c;
@@ -31,8 +31,8 @@ void	execexport(char *b, t_nums *n)
 		{
 			if (g_env[i])
 				free(g_env[i]);
-			evalquotes(exportout(s[c], n));
-			g_env[i] = ft_strdup(exportout(s[c], n));
+			evalquotes(exportout(s[c]));
+			g_env[i] = ft_strdup(exportout(s[c]));
 		}
 		i = 0;
 	}
