@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/31 15:11:11 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/01 15:24:00 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ char	**checkpipesnredirs(char *b)
 	return (finn(b, ret, j));
 }
 
-void	parseargs(char *b, char *buff, char *name)
+void	parseargs(char *b, char *buff, char *name, t_nums *n)
 {
-	if (!ft_strncmp(name, "ls", ft_strlen(name)))
-		execls(buff);
+	if (!ft_strncmp(name, "exit", ft_strlen(name)))
+		execexit(b, buff, name, n);
 	else if (!ft_strncmp(name, "pwd", ft_strlen(name)))
 		execpwd();
 	else if (!ft_strncmp(name, "cd", ft_strlen(name)))
@@ -80,7 +80,7 @@ void	parseargs(char *b, char *buff, char *name)
 	else if (!ft_strncmp(name, "echo", ft_strlen(name)))
 		exececho(buff);
 	else if (!ft_strncmp(name, "export", ft_strlen(name)))
-		execexport(b);
+		execexport(b, n);
 	else if (!ft_strncmp(name, "unset", ft_strlen(name)))
 		execunset(buff);
 	else if (!ft_strncmp(name, "env", ft_strlen(name)))
@@ -93,7 +93,7 @@ void	initialise(char	**env, t_nums *nums)
 {
 	nums->hlogc = 1;
 	nums->hfd = 0;
-	nums->sig = 0;
+	nums->hyphen = 1;
 	setenviron(env, nums);
 }
 
@@ -114,7 +114,7 @@ int	main(int argc, char **argv, char **envp)
 		if (b)
 		{
 			loghistory(b, nums);
-			initparse(b);
+			initparse(b, nums);
 			free(b);
 		}
 		if (!b)

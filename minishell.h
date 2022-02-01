@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/31 16:02:58 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/01 15:18:09 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ typedef struct s_nums
 	int		hfd;
 	int		envi;
 	int		print;
-	bool	sig;
+	bool	hyphen;
 	char	*envbuff;
+	char	**pr;
 }	t_nums;
 
-void	execls(char *b);
+void	execexit(char *b, char *buff, char *name, t_nums *n);
 void	execpwd(void);
 void	dhandler(int signum);
 void	execcd(char *b);
@@ -52,7 +53,7 @@ void	exececho(char *b);
 int		countchar(char *s, char c);
 int		prints(char *s, t_nums *n);
 int		echoerrcheck(char *b);
-void	execexport(char *b);
+void	execexport(char *b, t_nums *n);
 void	execunset(char *b);
 char	*parseenv(char **ENV, char *name);
 char	*printvar(char *s);
@@ -81,7 +82,7 @@ int		dquoteerr(int i, char *b);
 void	execinenv(int i, char *s, char *sub, char **sp);
 void	printenv(void);
 char	*handlenflag(char *b);
-char	*exportout(char *b);
+char	*exportout(char *b, t_nums *n);
 char	*printvarxp(char *s, char *ret);
 void	evalquotes(char	*s);
 char	**xportsplit(char *b);
@@ -90,9 +91,9 @@ int		incrementi(int i, char *s);
 int		sq(char *b, int i);
 int		dq(char *b, int i);
 char	**finn(char *b, char **ret, int j);
-void	initparse(char	*b);
+void	initparse(char *b, t_nums *n);
 char	**checkpipesnredirs(char *b);
-void	parseargs(char *b, char *buff, char *name);
+void	parseargs(char *b, char *buff, char *name, t_nums *n);
 char	*parsecmdname(char *b);
 char	*xportnmskip(char *b);
 size_t	empty(char *b);
@@ -100,5 +101,6 @@ char	*format(char *b);
 void	execcmd(char *b);
 void	execcommand(char *b);
 void	execseqcmd(char **rpaths, char **argvs, char *fpath);
+char	*handlehyphen(char *b, char *ret, t_nums *n);
 
 #endif

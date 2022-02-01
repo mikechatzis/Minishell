@@ -6,37 +6,20 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/31 14:11:26 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/01 13:25:28 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execls(char *b)
+void	execexit(char *b, char *buff, char *name, t_nums *n)
 {
-	DIR				*dir;
-	struct dirent	*curdir;
-	int				l;
-
-	l = ft_strlen(b);
-	if (!ft_strncmp(b, "ls", l))
-	{
-		dir = opendir(".");
-		if (!dir)
-			perror("opendir error");
-		else
-		{
-			curdir = readdir(dir);
-			while ((curdir))
-			{
-				printf("%s  ", curdir->d_name);
-				curdir = readdir(dir);
-			}
-			printf("\n");
-			free(curdir);
-		}
-		closedir(dir);
-	}
+	free(g_env);
+	free(b);
+	free(buff);
+	free(name);
+	free(n);
+	exit (0);
 }
 
 void	execpwd(void)

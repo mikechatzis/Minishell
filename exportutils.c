@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/31 16:30:12 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/01 15:14:12 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	*handlespacexp(char *b, char *ret)
 	return (b);
 }
 
-static char	*handlescharsxp(char *b, char *ret)
+static char	*handlescharsxp(char *b, char *ret, t_nums *n)
 {
 	if (*b == ' ')
 		b = handlespacexp(b, ret);
@@ -73,6 +73,8 @@ static char	*handlescharsxp(char *b, char *ret)
 		b = handledquotesxp(b, ret);
 	if (*b == '$')
 		b = printvarxp(b, ret);
+	if (*b == '~')
+		b = handlehyphen(b, ret, n);
 	if (*b && *b != ' ' && *b != '$' && *b != '\'' && *b != '"')
 	{
 		ft_strncat(ret, &*b, 1);
@@ -81,7 +83,7 @@ static char	*handlescharsxp(char *b, char *ret)
 	return (b);
 }
 
-char	*exportout(char *b)
+char	*exportout(char *b, t_nums *n)
 {
 	int		i;
 	char	*ret;
@@ -93,6 +95,6 @@ char	*exportout(char *b)
 	while (*b == ' ')
 		b++;
 	while (*b)
-		b = handlescharsxp(b, ret);
+		b = handlescharsxp(b, ret, n);
 	return (ret);
 }
