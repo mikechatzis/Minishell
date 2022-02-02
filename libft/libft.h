@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 16:59:03 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/31 16:24:45 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/02 14:26:55 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 typedef struct s_list
 {

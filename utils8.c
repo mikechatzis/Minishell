@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/01 16:14:57 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/02 14:19:47 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,13 @@ char	*handlehyphen(char *b, char *ret)
 	b = handlehyphen2(b, curuser, i);
 	free(tmp);
 	return (b);
+}
+
+void	exitall(char *b, char *buff, char *name, t_nums *n)
+{
+	free(g_env);
+	free(b);
+	free(buff);
+	free(name);
+	free(n);
 }

@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/01 16:20:32 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/02 14:49:23 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,31 @@
 
 void	execexit(char *b, char *buff, char *name, t_nums *n)
 {
-	free(g_env);
-	free(b);
-	free(buff);
-	free(name);
-	free(n);
-	exit (0);
+	char	**args;
+	bool	num;
+	size_t	i;
+
+	args = ft_split(buff, ' ');
+	i = 0;
+	num = 0;
+	if (args[2])
+	{
+		write(2, "exit: too many arguments\n", 25);
+		return ;
+	}
+	while (args[1][i])
+		if (!ft_isdigit(args[1][i++]))
+			num = 1;
+	if (num == 1 || ft_atoi(args[1]) < 0 || ft_atoi(args[1]) > 255)
+	{
+		printf
+		("exit: argument: '%s' is not numeric or exceeds scope\n", args[1]);
+		exitall(b, buff, name, n);
+		free(args);
+		exit(255);
+	}
+	free(args);
+	exit (ft_atoi(args[1]));
 }
 
 void	execpwd(void)

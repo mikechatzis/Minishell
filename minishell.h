@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/01 18:11:09 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/02 14:20:04 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ void	execseqcmd(char **rpaths, char **argvs, char *fpath);
 char	*handlehyphen(char *b, char *ret);
 int		handlerightredir(char *b, int i);
 int		handleleftredir(char *b, int i);
+void	exitall(char *b, char *buff, char *name, t_nums *n);
 
 #endif
