@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/01 16:13:39 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/05 18:33:21 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,9 @@ static char	*handlescharsxp(char *b, char *ret)
 
 char	*exportout(char *b)
 {
-	int		i;
 	char	*ret;
 
 	ret = malloc(1000);
-	i = 0;
 	if (echoerrcheck(b))
 		return ("");
 	while (*b == ' ')

@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/31 15:48:10 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/05 18:36:41 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ void	dhandler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		write(2, "\b\b  ", 4);
-		write(2, "\nMike's minishell % ", 20);
+		write(1, "\n", 1);
 		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 	else if (signum == SIGQUIT)
 		return ;
