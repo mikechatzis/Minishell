@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/05 18:33:21 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:01:59 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*exportout(char *b)
 {
 	char	*ret;
 
-	ret = malloc(1000);
+	ret = ft_calloc(1000, 1000);
 	if (echoerrcheck(b))
 		return ("");
 	while (*b == ' ')
@@ -95,4 +95,15 @@ char	*exportout(char *b)
 	while (*b)
 		b = handlescharsxp(b, ret);
 	return (ret);
+}
+
+char	*exportout2(char *dest, char *b)
+{
+	if (echoerrcheck(b))
+		return ("");
+	while (*b == ' ')
+		b++;
+	while (*b)
+		b = handlescharsxp(b, dest);
+	return (dest);
 }

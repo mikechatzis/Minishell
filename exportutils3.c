@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/25 13:23:43 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:01:36 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 
 int	incrementi(int i, char *s)
 {
-	while (g_env[i] && (!namecmp(g_env[i], exportout(s)) || !g_env[i][0]))
+	char	*dest;
+
+	dest = malloc(1000);
+	while (g_env[i]
+		&& (!namecmp(g_env[i], exportout2(dest, s)) || !g_env[i][0]))
 		i++;
+	free(dest);
 	return (i);
 }
 

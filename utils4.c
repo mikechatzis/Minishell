@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/01/31 12:24:04 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:42:11 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ char	**processinput(char	*b)
 	while (*b == ' ')
 		b++;
 	s = xportsplit(b);
+	if (!*s)
+		while (g_env[++i])
+			printf("declare -x %s\n", g_env[i]);
+	i = -1;
 	while (s[++i])
 	{
 		if (isnumeric(s[i]))
@@ -87,6 +91,18 @@ int	isnumeric(char *b)
 		return (1);
 	}
 	return (0);
+}
+
+void	freeenvnstruct(t_nums *n)
+{
+	int	i;
+
+	i = -1;
+	while (g_env[++i])
+		free(g_env[i]);
+	free (g_env[998]);
+	free(g_env);
+	free(n);
 }
 
 	// g_env = malloc(1000 * sizeof(char *));

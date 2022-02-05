@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/01 16:12:34 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/05 19:54:38 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void	execexport(char *b)
 {
 	int		i;
 	int		c;
+	char	*dest;
 	char	**s;
 
 	b = xportnmskip(b);
 	i = 0;
 	c = -1;
+	dest = malloc(1000);
 	if (echoerrcheck(b))
 		return ;
 	s = processinput(b);
@@ -31,12 +33,17 @@ void	execexport(char *b)
 		{
 			if (g_env[i])
 				free(g_env[i]);
-			evalquotes(exportout(s[c]));
-			g_env[i] = ft_strdup(exportout(s[c]));
+			evalquotes(exportout2(dest, s[c]));
+			ft_bzero(dest, 1000);
+			g_env[i] = ft_strdup(exportout2(dest, s[c]));
 		}
 		i = 0;
 	}
+	i = -1;
+	while (s[++i])
+		free(s[i]);
 	free(s);
+	free(dest);
 	cleartrash(g_env);
 }
 
@@ -59,6 +66,8 @@ void	execunset(char *b)
 				ft_bzero(g_env[i], ft_strlen(g_env[i]));
 		i = -1;
 	}
+	while (s[++i])
+		free(s[i]);
 	free(s);
 }
 

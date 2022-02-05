@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/01 18:20:06 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/05 20:49:35 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (!b)
 		{
-			free(nums);
-			free(g_env);
+			freeenvnstruct(nums);
 			return (0);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/02 14:20:04 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:25:18 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct s_nums
 	int		print;
 	bool	hyphen;
 	char	*envbuff;
-	char	**pr;
 }	t_nums;
 
 void	execexit(char *b, char *buff, char *name, t_nums *n);
@@ -105,5 +104,7 @@ char	*handlehyphen(char *b, char *ret);
 int		handlerightredir(char *b, int i);
 int		handleleftredir(char *b, int i);
 void	exitall(char *b, char *buff, char *name, t_nums *n);
+void	freeenvnstruct(t_nums *n);
+char	*exportout2(char *dest, char *b);
 
 #endif
