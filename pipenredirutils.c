@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/05 21:25:54 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:24:50 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,40 +63,28 @@ void	initparse(char	*b, t_nums *n)
 {
 	char	*buff;
 	char	*name;
-	int		i;
 	char	**pr;
 
-	i = -1;
+	buff = NULL;
 	if (echoerrcheck(b))
 		return ;
 	name = parsecmdname(b);
 	pr = checkpipesnredirs(b);
 	if (!*pr)
-	{
-		while (++i < 1000)
-			free(pr[i]);
-		free(pr);
-		free(name);
-		return ;
-	}
+		return (initparseret(pr, name));
 	if (!pr[1])
 	{
 		if (checkstrayops(b))
-		{
-			while (++i < 1000)
-				free(pr[i]);
-			free(pr);
-			free(name);
-			return ;
-		}
+			return (initparseret(pr, name));
 		buff = exportout(b);
 		parseargs(b, buff, name, n);
 		n->hyphen = 1;
 	}
-	//else to be added for pipes/redirections handling
-	while (pr[++i])
-		free(pr[i]);
-	free3(pr, buff, name);
+	//else
+		//to be added for pipes/redirections handling
+	freedstring(pr);
+	free(buff);
+	free(name);
 }
 
 	// for (int k = 0; ret[k]; k++)

@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/05 21:25:18 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:13:01 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,11 @@ int		handleleftredir(char *b, int i);
 void	exitall(char *b, char *buff, char *name, t_nums *n);
 void	freeenvnstruct(t_nums *n);
 char	*exportout2(char *dest, char *b);
+void	cleanhouse(char **s, char *dest);
+void	xportloop(int i, int c, char **s, char *dest);
+char	*handlescharsxp(char *b, char *ret);
+void	freedstring(char **s);
+bool	checkifnumeric(char *s);
+void	initparseret(char **pr, char *name);
 
 #endif

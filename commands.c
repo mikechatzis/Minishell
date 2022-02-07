@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/05 21:19:11 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:05:35 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,28 @@ void	execexit(char *b, char *buff, char *name, t_nums *n)
 {
 	char	**args;
 	bool	num;
-	size_t	i;
 
 	args = ft_split(buff, ' ');
-	i = 0;
-	num = 0;
 	if (!args[1])
-	{
-		free(args[0]);
-		free(args);
+		freedstring(args);
+	if (!args[1])
 		exit(0);
-	}
 	if (args[2])
 	{
 		write(2, "exit: too many arguments\n", 25);
-		while (args[i])
-			free(args[i++]);
-		free(args);
+		freedstring(args);
 		return ;
 	}
-	while (args[1][i])
-		if (!ft_isdigit(args[1][i++]))
-			num = 1;
+	num = checkifnumeric(args[1]);
 	if (num == 1 || ft_atoi(args[1]) < 0 || ft_atoi(args[1]) > 255)
 	{
 		printf
 		("exit: argument: '%s' is not numeric or exceeds scope\n", args[1]);
 		exitall(b, buff, name, n);
-		free(args[0]);
-		i = 0;
-		while (args[i])
-			free(args[i++]);
-		free(args);
+		freedstring(args);
 		exit(255);
 	}
-	free(args[0]);
-	free(args[1]);
-	free(args);
+	freedstring(args);
 	exit (ft_atoi(args[1]));
 }
 
