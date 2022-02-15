@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/07 13:24:50 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/15 15:47:31 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char	**finn(char *b, char **ret, int j)
 	if (*b)
 		ret[j++] = ft_strdup(b);
 	ret[j] = 0;
+	for (size_t i = 0; ret[i]; i++)
+		printf("{%s}\n", ret[i]);
 	return (ret);
 }
 

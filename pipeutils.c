@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/01 18:16:44 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/15 15:38:04 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	handlerightredir(char *b, int i)
 			return (-1);
 		}
 		else if (b[i + 1] == '>')
-			return (++i);
+			return (i + 2);
 	}
-	return (++i);
+	return (i);
 }
 
 int	handleleftredir(char *b, int i)
@@ -46,7 +46,7 @@ int	handleleftredir(char *b, int i)
 		}
 		else if (b[i + 1] == '<'
 			|| (b[i + 1] == '<' && b[i + 2] == '<' && b[i + 3] != '<'))
-			return (++i);
+			return (i + 2);
 	}
-	return (++i);
+	return (i);
 }

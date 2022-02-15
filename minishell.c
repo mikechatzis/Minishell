@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/05 20:49:35 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/15 15:37:32 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	evalchar(char *b, int i)
 	i = handlerightredir(b, i);
 	if (i != -1)
 		i = handleleftredir(b, i);
-	return (i);
+	return (++i);
 }
 
 char	**checkpipesnredirs(char *b)
@@ -43,8 +43,8 @@ char	**checkpipesnredirs(char *b)
 			i = evalchar(b, i);
 			if (i == -1)
 				return (ret);
-			ret[j++] = ft_substr(b, 0, i + 1);
-			b += i + 1;
+			ret[j++] = ft_substr(b, 0, i);
+			b += i;
 			i = -1;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/07 13:04:11 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/15 15:44:57 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	freedstring(char **s)
 {
 	int	i;
 
-	i = -1;
+	i = 0;
 	while (s[i])
 		free(s[i++]);
 	free(s);
