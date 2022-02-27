@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/07 12:54:51 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/27 12:00:57 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	execexport(char *b)
 	b = xportnmskip(b);
 	i = 0;
 	c = -1;
-	dest = ft_calloc(1000, 1000);
+	dest = ft_calloc(1000, sizeof(char *));
 	if (echoerrcheck(b))
 		return ;
 	s = processinput(b);
@@ -52,7 +52,11 @@ void	execunset(char *b)
 	{
 		while (g_env[++i])
 			if (!namecmpu(g_env[i], s[c]))
-				ft_bzero(g_env[i], ft_strlen(g_env[i]));
+			{
+				if (!ft_strncmp(g_env[i], "PATH", 4))
+					execexport(ft_strjoin("export OLDPATH=", g_env[i] + 5));
+				ft_bzero(g_env[i], ft_strlen(g_env[i]));				
+			}
 		i = -1;
 	}
 	while (s[++i])

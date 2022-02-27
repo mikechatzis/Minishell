@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/15 15:44:57 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/24 14:40:28 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,19 @@ void	xportloop(int i, int c, char **s, char *dest)
 	g_env[i] = ft_strdup(exportout2(dest, s[c]));
 }
 
-void	freedstring(char **s)
+int	freedstring(char **s)
 {
 	int	i;
+	int	ret;
 
 	i = 0;
+	ret = 0;
+	if (s[1])
+		ret = ft_atoi(s[1]);
 	while (s[i])
 		free(s[i++]);
 	free(s);
+	return (ret);
 }
 
 bool	checkifnumeric(char *s)

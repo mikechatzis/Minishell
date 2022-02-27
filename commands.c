@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/07 13:05:35 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/24 14:31:18 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void	execexit(char *b, char *buff, char *name, t_nums *n)
 		freedstring(args);
 		exit(255);
 	}
-	freedstring(args);
-	exit (ft_atoi(args[1]));
+	exit (freedstring(args));
 }
 
 void	execpwd(void)

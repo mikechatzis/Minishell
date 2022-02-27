@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/15 15:37:32 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/27 11:42:14 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**checkpipesnredirs(char *b)
 
 	i = -1;
 	j = 0;
-	ret = ft_calloc(1000, 1000);
+	ret = ft_calloc(1000, sizeof(char *));
 	while (b[++i])
 	{
 		i = sq(b, i);
@@ -71,6 +71,7 @@ void	parseargs(char *b, char *buff, char *name, t_nums *n)
 		execenv(buff);
 	else
 		execcommand(buff);
+		
 }
 
 void	initialise(char	**env, t_nums *nums)

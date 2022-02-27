@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/07 12:38:46 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/27 12:02:28 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	execcmd(char *b)
 	int		i;
 
 	i = -1;
-	while (ft_strncmp(g_env[++i], "PATH", 4))
-		continue ;
+	while (ft_strncmp(g_env[++i], "PATH", 4) && ft_strncmp(g_env[++i], "OLDPATH", 7))
+		continue ;	
 	while (*b == ' ')
 		b++;
 	g_env[i] += 5;
