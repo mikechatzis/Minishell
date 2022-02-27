@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/24 14:40:28 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/27 12:13:35 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	xportloop(int i, int c, char **s, char *dest)
 	evalquotes(exportout2(dest, s[c]));
 	ft_bzero(dest, 1000);
 	g_env[i] = ft_strdup(exportout2(dest, s[c]));
+	if (!ft_strncmp(g_env[i], "PATH", 4))
+		execunset("unset OLDPATH");
 }
 
 int	freedstring(char **s)

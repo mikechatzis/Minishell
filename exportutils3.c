@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/07 12:53:25 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/27 12:37:17 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	cleartrash(char **b)
 {
 	while (*b)
 	{
-		if (!ft_strchr(*b, '='))
+		if (!ft_strchr(*b, '=') && **b)
 			free(*b);
 		b++;
 	}
