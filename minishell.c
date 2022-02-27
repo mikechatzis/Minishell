@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/27 11:42:14 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/02/27 12:03:18 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	parseargs(char *b, char *buff, char *name, t_nums *n)
 		execenv(buff);
 	else
 		execcommand(buff);
-		
 }
 
 void	initialise(char	**env, t_nums *nums)
