@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/27 12:18:39 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/03/11 11:03:04 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	initparse(char	*b, t_nums *n)
 		n->hyphen = 1;
 	}
 	// else
-	// 	handletruncredirs(pr);
+	// 	batus_function_here(b);
 	freedstring(pr);
 	free(buff);
 	free(name);
