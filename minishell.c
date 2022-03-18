@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/03/11 11:09:07 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/03/18 19:26:03 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	evalchar(char *b, int i)
 		return (-1);
 	}
 	i = handlerightredir(b, i);
-	if (i != -1)
+	if (i != -2)
 		i = handleleftredir(b, i);
 	return (++i);
 }
@@ -94,7 +94,7 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, dhandler);
 	while (1)
 	{
-		b = readline("Mike's minishell % ");
+		b = readline("Mike and Batu's minishell % ");
 		if (b)
 		{
 			loghistory(b, nums);

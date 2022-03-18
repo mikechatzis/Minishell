@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:15:48 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/24 15:15:13 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/03/18 20:01:51 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,8 @@ int		freedstring(char **s);
 bool	checkifnumeric(char *s);
 void	initparseret(char **pr, char *name);
 void	handletruncredirs(char **s);
+char	*fixspace(char *b);
+char	*handlespacexp(char *b, char *ret);
+char	*handlescharsforpipes(char *b, char *ret);
 
 #endif

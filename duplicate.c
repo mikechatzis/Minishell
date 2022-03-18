@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils10.c                                          :+:      :+:    :+:   */
+/*   duplicate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/03/18 19:50:32 by mchatzip         ###   ########.fr       */
+/*   Created: 2022/02/28 01:01:47 by bkeskint          #+#    #+#             */
+/*   Updated: 2022/03/11 13:42:35 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell2.h"
 
-void	initparseret(char **pr, char *name)
+int	arraylenght(char **source)
 {
-	freedstring(pr);
-	free(name);
+	int	i;
+
+	i = 0;
+	while (source[i])
+		i++;
+	return (i);
 }
 
-char	*handlescharsforpipes(char *b, char *ret)
+char	**arraydup(char **source)
 {
-	if (*b == ' ')
-		b = handlespacexp(b, ret);
-	if (*b && *b != ' ')
+	char	**duplicate;
+	int		i;
+
+	i = 0;
+	duplicate = (char **)malloc(sizeof(char *) * (arraylenght(source) + 1));
+	while (source[i])
 	{
-		ft_strncat(ret, &*b, 1);
-		b++;
+		duplicate[i] = ft_strdup(source[i]);
+		i++;
 	}
-	return (b);
+	duplicate[i] = NULL;
+	return (duplicate);
 }

@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils10.c                                          :+:      :+:    :+:   */
+/*   exit_management.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/03/18 19:50:32 by mchatzip         ###   ########.fr       */
+/*   Created: 2022/03/09 23:47:58 by bkeskint          #+#    #+#             */
+/*   Updated: 2022/03/11 13:42:58 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell2.h"
 
-void	initparseret(char **pr, char *name)
+void	ft_exit(char **args)
 {
-	freedstring(pr);
-	free(name);
+	char	*tmp;
+	int		ret;
+
+	if (args && args[1])
+	{
+		tmp = args[1];
+		ret = ft_atoi(tmp);
+		exit(ret);
+	}
+	else
+		exit(EXIT_SUCCESS);
 }
 
-char	*handlescharsforpipes(char *b, char *ret)
+void	clean_exit(char **args)
 {
-	if (*b == ' ')
-		b = handlespacexp(b, ret);
-	if (*b && *b != ' ')
-	{
-		ft_strncat(ret, &*b, 1);
-		b++;
-	}
-	return (b);
+	freesplit(args);
+	exit(EXIT_FAILURE);
 }

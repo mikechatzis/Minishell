@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils10.c                                          :+:      :+:    :+:   */
+/*   ifspace.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/03/18 19:50:32 by mchatzip         ###   ########.fr       */
+/*   Created: 2022/02/28 01:02:27 by bkeskint          #+#    #+#             */
+/*   Updated: 2022/03/11 13:43:35 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell2.h"
 
-void	initparseret(char **pr, char *name)
+int	ifspace(char *line)
 {
-	freedstring(pr);
-	free(name);
-}
+	int		i;
+	size_t	counter;
 
-char	*handlescharsforpipes(char *b, char *ret)
-{
-	if (*b == ' ')
-		b = handlespacexp(b, ret);
-	if (*b && *b != ' ')
+	i = 0;
+	counter = 0;
+	while (line[i])
 	{
-		ft_strncat(ret, &*b, 1);
-		b++;
+		if (line[i] == ' ')
+			counter++;
+		i++;
 	}
-	return (b);
+	if (counter == ft_strlen(line))
+		return (1);
+	return (0);
 }

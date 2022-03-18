@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 16:59:03 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/02 14:26:55 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/03/11 13:50:30 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,7 @@ int		ft_lstsize(t_list *lst);
 void	ft_freeall(size_t ptrnum, void	*p, ...);
 
 char	*ft_strncat(char *dest, char *src, int nb);
+
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

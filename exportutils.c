@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 11:19:39 by mchatzip          #+#    #+#             */
-/*   Updated: 2022/02/24 15:28:10 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/03/18 19:42:01 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*handledquotesxp(char *b, char *ret)
 	return (b);
 }
 
-static char	*handlespacexp(char *b, char *ret)
+char	*handlespacexp(char *b, char *ret)
 {
 	ft_strncat(ret, " ", 1);
 	while (*b == ' ')
