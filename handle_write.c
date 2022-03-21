@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 22:40:33 by bkeskint          #+#    #+#             */
-/*   Updated: 2022/03/11 13:43:23 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:52:24 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	writer_handle(char	*eof, t_parameters *params)
 	int		i;
 
 	i = 0;
-	params->fd_io[0] = open("_tmp", O_RDWR | O_CREAT, 0644);
+	params->fd_io[0] = open(" ", O_RDWR | O_CREAT, 0644);
 	if (params->fd_io[0] == -1)
 		open_failed(params);
 	while (gnl(STDIN_FILENO, line) != 0

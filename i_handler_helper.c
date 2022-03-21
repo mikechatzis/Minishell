@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 21:38:34 by bkeskint          #+#    #+#             */
-/*   Updated: 2022/03/11 13:43:51 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:52:02 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ int	handle_i(t_parameters *params, char **args, int *i)
 			delete_last(args);
 		move_back (args, *i + 1);
 		move_back (args, *i);
+		delete_last(args);
 		params->i_file++;
 		*i = 0;
+		return (1);
 	}
 	return (0);
 }
@@ -69,7 +71,7 @@ int	handle_i2(t_parameters *params, char **args, int *i)
 		delete_last(args);
 		writer_handle(args[*i + mv], params);
 		delete_last(args);
-		args[*i + mv] = ft_strdup("_tmp");
+		args[*i + mv] = ft_strdup(" ");
 		params->i_file++;
 		*i = 0;
 		return (1);
@@ -92,7 +94,7 @@ int	handle_i2_join(t_parameters *params, char **args, int *i)
 		args[*i + mv] = temp;
 		writer_handle(args[*i + mv], params);
 		delete_last(args);
-		args[*i + mv] = ft_strdup("_tmp");
+		args[*i + mv] = ft_strdup(" ");
 		params->i_file++;
 		*i = 0;
 		return (1);

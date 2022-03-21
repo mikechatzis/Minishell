@@ -6,7 +6,7 @@
 /*   By: mchatzip <mchatzip@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:48:06 by bkeskint          #+#    #+#             */
-/*   Updated: 2022/03/18 20:02:33 by mchatzip         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:41:40 by mchatzip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ void	second_main(char const *s)
 		return ;
 	else
 		route(&params);
+	freedstring(params.env);
 	return ;
 }
